@@ -1,8 +1,11 @@
+import {Friends} from '../types/types'
 
-function FriendContainer() {
+function FriendContainer({image,name,gender}:Friends) {
     return (
         <div>
-            <h1>eeeh</h1>
+            <img src={image} alt={name} />
+            <h1>{name}</h1>
+            <h1>{gender}</h1>
         </div>
     )
 }
