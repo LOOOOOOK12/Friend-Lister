@@ -1,8 +1,8 @@
 import {Add} from '../types/types'
 
-function button({buttonName}:Add) {
+function button({buttonName, onclick}:Add) {
     return (
-        <button>
+        <button onClick={onclick}>
             {buttonName}
         </button>
     )
