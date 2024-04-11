@@ -10,4 +10,4 @@ export type Friends = {
 //Functions
 export type Add = {
     buttonName: string;
-}
+} 
