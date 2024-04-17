@@ -11,11 +11,11 @@ import EditFriend from "@/modals/EditFriend"
 function friendContainer() {
     return (
         <Card>
-            <CardHeader>
+            <CardHeader  onClick={()=>alert("Lobot")}>
                 <CardTitle>Michael Jackstone</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col justify-center items-center">
-                <img src="src\assets\sampleimages\js.png" alt="" className="h-32" />
+            <CardContent className="flex flex-col justify-center items-center gap-4">
+                <img src="src\assets\sampleimages\js.png" alt="" className="h-36 w-full" />
                 <h1>20 Years Old</h1>
                 <h1>Febuary 29 2024</h1>
                 <h1>Bading</h1>
