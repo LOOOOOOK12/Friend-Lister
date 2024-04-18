@@ -7,12 +7,19 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+import Labels from "@/components/containers/labels"
 import { Button } from "@/components/ui/button"
-
+import { useState } from "react"
 
 function EditFriend() {
+
+    const [friend, editFriend] = useState({
+        name: '',
+        age:'',
+        birthday:'',
+        picture:'',
+    })
+
     return (
         <Dialog>
                 <DialogTrigger asChild>
@@ -25,35 +32,34 @@ function EditFriend() {
                         Enter your details about your friend!!
                     </DialogDescription>
                     </DialogHeader>
-                    <div className="flex flex-col gap-5">
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor="name">
-                            Name
-                            </Label>
-                            <Input
-                            id="name"
-                            defaultValue="Juan Dela Cruz"
-                            className="col-span-3"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor="age">
-                            Age
-                            </Label>
-                            <Input
-                            id="age"
-                            defaultValue="@peduarte"
-                            className="col-span-3"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor="picture">Picture</Label>
-                            <Input id="picture" type="file" />
-                        </div>
-                    </div>
-                    <DialogFooter>
-                        <Button type="submit">Save changes</Button>
-                    </DialogFooter>
+                    <form  className="flex flex-col gap-5">
+                        <Labels
+                            labelName="Name"
+                            type="text"
+                            placeholder="Juan Dela Cruz"
+                            value={friend.name}
+                        />
+                        <Labels
+                            labelName="Age"
+                            type="text"
+                            placeholder="12"
+                            value={friend.age}
+                        />
+                        <Labels
+                            labelName="Birthday"
+                            type="date"
+                            placeholder="12"
+                            value={friend.birthday}
+                        />
+                        <Labels
+                            labelName="Picture"
+                            type="file"
+                            value={friend.picture}
+                        />
+                        <DialogFooter>
+                            <Button type="submit">Save changes</Button>
+                        </DialogFooter>
+                    </form>
                 </DialogContent>
         </Dialog>
     )
