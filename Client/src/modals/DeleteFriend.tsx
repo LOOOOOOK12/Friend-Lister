@@ -13,7 +13,7 @@ function DeleteFriend() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline">Delete</Button>
+                <Button variant="destructive">Delete</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] flex flex-col items-center">
                 <DialogHeader>
