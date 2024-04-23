@@ -13,7 +13,7 @@ import { useState } from "react"
 
 function EditFriend() {
 
-    const [friend, editFriend] = useState({
+    const [editFriend, seteditFriend] = useState({
         name: '',
         age:'',
         birthday:'',
@@ -23,7 +23,7 @@ function EditFriend() {
     return (
         <Dialog>
                 <DialogTrigger asChild>
-                    <Button variant="outline">Edit</Button>
+                    <Button variant="default" className="bg-green-600 hover:bg-green-700">Edit</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
@@ -37,24 +37,24 @@ function EditFriend() {
                             labelName="Name"
                             type="text"
                             placeholder="Juan Dela Cruz"
-                            value={friend.name}
+                            value={editFriend.name}
                         />
                         <Labels
                             labelName="Age"
                             type="text"
                             placeholder="12"
-                            value={friend.age}
+                            value={editFriend.age}
                         />
                         <Labels
                             labelName="Birthday"
                             type="date"
                             placeholder="12"
-                            value={friend.birthday}
+                            value={editFriend.birthday}
                         />
                         <Labels
                             labelName="Picture"
                             type="file"
-                            value={friend.picture}
+                            value={editFriend.picture}
                         />
                         <DialogFooter>
                             <Button type="submit">Save changes</Button>
