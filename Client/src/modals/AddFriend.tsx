@@ -26,7 +26,7 @@ function AddFriend() {
     return (
         <Dialog>
         <DialogTrigger asChild>
-            <Button variant="outline">Add Friend</Button>
+            <Button className='bg-green-500 hover:bg-green-600'>Add Friend</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
