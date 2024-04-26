@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import Labels from '@/components/containers/labels';
@@ -20,13 +20,13 @@ function AddFriend() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Add logic to handle form submission with friend data
+        
     };
 
     return (
         <Dialog>
         <DialogTrigger asChild>
-            <Button className='bg-green-500 hover:bg-green-600'>Add Friend</Button>
+            <Button className='bg-indigo-800 hover:bg-violet-600'>Add Friend</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
