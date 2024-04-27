@@ -18,16 +18,16 @@ function Labels({ labelName, type, placeholder, value, onChange }: Props) {
     };
 
     return (
-        <div className="flex flex-col gap-2">
-        <Label>{labelName}</Label>
-        <Input
-            id={labelName.toLowerCase()}
-            placeholder={placeholder}
-            type={type}
-            onChange={handleChange}
-            value={value.toString()} 
-            className="col-span-3"
-        />
+        <div className="flex flex-col gap-2 bg-[]">
+            <Label>{labelName}</Label>
+            <Input
+                id={labelName.toLowerCase()}
+                placeholder={placeholder}
+                type={type}
+                onChange={handleChange}
+                value={value.toString()} 
+                className="col-span-3"
+            />
         </div>
     );
 }
