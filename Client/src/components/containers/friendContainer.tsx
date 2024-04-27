@@ -25,7 +25,6 @@ function friendContainer() {
                 <EditFriend/>
             </CardFooter>
         </Card>
-
     )
 }
 
