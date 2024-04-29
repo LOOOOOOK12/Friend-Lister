@@ -62,7 +62,7 @@ function AddFriend() {
                         onChange={(value) => handleChange('picture', value)}
                     />
                     <DialogFooter>
-                        <Button className='' type="submit">Add your Friend!</Button>
+                        <Button type="submit">Add your Friend!</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
