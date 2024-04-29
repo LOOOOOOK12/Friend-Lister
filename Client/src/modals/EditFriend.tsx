@@ -22,16 +22,16 @@ function EditFriend() {
 
     return (
         <Dialog>
-                <DialogTrigger asChild>
-                    <Button variant="default" className="bg-green-600 hover:bg-green-700">Edit</Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
+            <DialogTrigger asChild>
+                <Button variant="default" className="bg-green-600 hover:bg-green-700">Edit</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
                     <DialogTitle>Edit your friend's details</DialogTitle>
                     <DialogDescription>
                         Enter your details about your friend!!
                     </DialogDescription>
-                    </DialogHeader>
+                </DialogHeader>
                     <form  className="flex flex-col gap-5">
                         <Labels
                             labelName="Name"
@@ -60,7 +60,7 @@ function EditFriend() {
                             <Button type="submit">Save changes</Button>
                         </DialogFooter>
                     </form>
-                </DialogContent>
+            </DialogContent>
         </Dialog>
     )
 }
