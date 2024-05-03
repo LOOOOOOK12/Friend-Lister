@@ -7,20 +7,19 @@ import {
 } from "@/components/ui/card"
 import DeleteFriend from "@/modals/DeleteFriend"
 import EditFriend from "@/modals/EditFriend"
+import FriendProfile from "@/modals/FriendProfile"
 
 function friendContainer() {
     return (
         <Card>
-            <CardHeader>
-                <CardTitle>Michael Jackstone</CardTitle>
+            <CardHeader className="items-end">
+                <FriendProfile/>
             </CardHeader>
-            <CardContent className="flex flex-col justify-center items-center gap-4" onClick={()=>alert("Lobot")}>
-                <img src="src\assets\sampleimages\js.png" alt="" className="h-36 w-full" />
-                <h1>20 Years Old</h1>
-                <h1>Febuary 29 2024</h1>
-                <h1>Bading</h1>
+            <CardContent className="flex flex-col justify-center items-center gap-4">
+                <img src="src\assets\sampleimages\js.png" alt="" className="h-44 w-full" />
+                <h1 className="text-2xl font-semibold">Mickael Jackstone</h1>
             </CardContent>
-            <CardFooter className="gap-3 justify-end">
+            <CardFooter className="flex flex-col gap-3 justify-end">
                 <DeleteFriend/>
                 <EditFriend/>
             </CardFooter>
