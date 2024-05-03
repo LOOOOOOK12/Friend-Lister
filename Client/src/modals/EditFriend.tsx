@@ -23,7 +23,7 @@ function EditFriend() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="default" className="bg-green-600 hover:bg-green-700">Edit</Button>
+                <Button className="w-full bg-green-600 hover:bg-green-700">Edit</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
