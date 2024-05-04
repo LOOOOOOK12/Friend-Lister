@@ -12,7 +12,7 @@ function FriendProfile() {
                 <Button className='bg-transparent border-[0.01rem]'><Ellipsis/></Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader className='flex items-center'>
+                <DialogHeader className='flex items-center gap-5'>
                     <img src={JS} className='h-24 w-24 rounded-md' />
                     <DialogTitle className='text-3xl font-semibold'>Micahel Jackstone</DialogTitle>
                     <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quas velit odio </DialogDescription>
