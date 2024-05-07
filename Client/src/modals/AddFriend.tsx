@@ -36,8 +36,7 @@ function AddFriend() {
                     <DialogDescription>Enter your details about your friend!!</DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                    <div className='flex gap-3'>
-                        <div className='flex flex-col gap-3'>
+                    <div className='flex flex-col gap-3'>
                             <Labels
                                 labelName="Name"
                                 type="text"
@@ -59,19 +58,18 @@ function AddFriend() {
                                 value={friend.birthday}
                                 onChange={(value) => handleChange('birthday', value)}
                             />
+                            <TextArea
+                                labelName='Describe your Friend'
+                                placeholder="Etc"
+                                onChange={(value) => handleChange('description', value)}
+                                value={friend.description}
+                            />
                             <Labels
                                 labelName="Picture"
                                 type="file"
                                 value={friend.picture}
                                 onChange={(value) => handleChange('picture', value)}
                             />
-                        </div>
-                        <TextArea
-                            labelName='Describe your Friend'
-                            placeholder="Etc"
-                            onChange={(value) => handleChange('description', value)}
-                            value={friend.description}
-                        />
                     </div>
                     <DialogFooter>
                         <Button type="submit">Add your Friend!</Button>
