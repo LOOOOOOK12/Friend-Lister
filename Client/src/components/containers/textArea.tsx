@@ -21,7 +21,7 @@ function TextArea({ labelName, placeholder, value, onChange }: Props) {
         <div className="flex flex-col gap-2">
             <Label>{labelName}</Label>
             <Textarea
-                className='h-full w-full'
+                className=' w-full'
                 placeholder={placeholder}
                 onChange={handleChange}
                 value={value.toString()}
