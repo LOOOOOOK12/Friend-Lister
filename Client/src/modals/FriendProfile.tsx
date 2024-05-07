@@ -12,10 +12,17 @@ function FriendProfile() {
                 <Button className='bg-transparent border-[0.01rem]'><Ellipsis/></Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader className='flex items-center gap-5'>
-                    <img src={JS} className='h-24 w-24 rounded-md' />
+                <DialogHeader className='flex gap-5'>
+                    <div className='flex gap-6'>
+                        <img src={JS} className='h-32 w-44 rounded-md' />
+                        <div className='flex flex-col gap-3'>
+                            <h1>Gender: Bading</h1>
+                            <h1>Age: 21</h1>
+                            <h1>Birthday: Febuary 29, 2014</h1>
+                        </div>
+                    </div>
                     <DialogTitle className='text-3xl font-semibold'>Micahel Jackstone</DialogTitle>
-                    <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quas velit odio </DialogDescription>
+                    <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quas velit odio Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quas velit odio </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
                     <EditFriend/>
