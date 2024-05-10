@@ -11,7 +11,6 @@ import Labels from "@/components/containers/labels"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import TextArea from '@/components/containers/textArea';
-import { Description } from "@radix-ui/react-dialog";
 
 function EditFriend() {
 
