@@ -1,6 +1,13 @@
-import { Ellipsis } from 'lucide-react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { Ellipsis} from 'lucide-react';
+import { 
+    Dialog, 
+    DialogContent, 
+    DialogDescription, 
+    DialogFooter, 
+    DialogHeader, 
+    DialogTitle, 
+    DialogTrigger 
+} from '@/components/ui/dialog';
 import EditFriend from './EditFriend';
 import DeleteFriend from './DeleteFriend';
 import JS from '@/assets/sampleimages/js.png'
@@ -9,7 +16,7 @@ function FriendProfile() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className='bg-transparent border-[0.01rem]'><Ellipsis/></Button>
+                <Ellipsis/>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader className='flex gap-5'>
