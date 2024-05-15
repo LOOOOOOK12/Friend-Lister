@@ -1,8 +1,11 @@
 import "dotenv/config"
 import express, { Request, Response, NextFunction } from 'express'
 import friendsRoutes from "./routes/friends-routes"
+import morgan from "morgan"
 
 const app = express()
+
+app.use(morgan("dev"))
 
 app.use(express.json())
 
