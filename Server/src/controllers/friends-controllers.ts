@@ -10,6 +10,17 @@ export const getFriends: RequestHandler = async (req,res, next) => {
     }
 }
 
+export const getFriend: RequestHandler = async (req, res, next) => {
+    const friendId = req.params.friendId
+
+    try {
+        const friend = await FriendModel.findById(friendId).exec()
+        res.status(200).json(friend)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const createFriend: RequestHandler = async (req, res, next) => {
     const name = req.body.name
     const age = req.body.age
