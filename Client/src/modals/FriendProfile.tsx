@@ -1,4 +1,4 @@
-import { Ellipsis} from 'lucide-react';
+import { Ellipsis } from 'lucide-react';
 import { 
     Dialog, 
     DialogContent, 
