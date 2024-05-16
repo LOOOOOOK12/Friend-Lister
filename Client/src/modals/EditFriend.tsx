@@ -67,7 +67,7 @@ function EditFriend() {
                         />
                         <TextArea
                             labelName='Describe your Friend'
-                            placeholder="Etc"
+                            placeholder="My friend is..."
                             onChange={(value) => handleChange('description', value)}
                             value={editFriend.description}
                         />
