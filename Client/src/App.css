@@ -5,3 +5,7 @@
   color: #e3e3e3;
   scroll-behavior: smooth;
 }
+
+input {
+  color-scheme: dark;
+}
