@@ -1,7 +1,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -32,16 +31,13 @@ function EditFriend() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button>Edit</Button>
+                <Button className="bg-others-secondary border-none hover:bg-[#511f51]">Edit</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Edit your friend's details</DialogTitle>
-                    <DialogDescription>
-                        Enter your details about your friend!!
-                    </DialogDescription>
                 </DialogHeader>
-                    <form  className="flex flex-col gap-5">
+                    <form  className="flex flex-col gap-2">
                         <Labels
                             labelName="Name"
                             type="text"
@@ -72,7 +68,7 @@ function EditFriend() {
                             value={editFriend.description}
                         />
                         <DialogFooter>
-                            <Button type="submit">Save changes</Button>
+                            <Button type="submit" className="bg-others-secondary border-none hover:bg-[#5a255a]">Save changes</Button>
                         </DialogFooter>
                     </form>
             </DialogContent>
