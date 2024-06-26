@@ -4,7 +4,8 @@ const friendSchema = new Schema({
     name: { type: String, required: true },
     age: { type: Number },
     gender: { type: String },
-    description: {type: String},
+    description: { type: String },
+    picture: { type: String },
 
 }, { timestamps:true })
 
