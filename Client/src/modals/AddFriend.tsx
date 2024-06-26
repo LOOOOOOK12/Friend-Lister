@@ -28,15 +28,15 @@ function AddFriend() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className='bg-transparent'>Add Friend</Button>
+                <Button className='bg-others-secondary border-none hover:bg-[#582358]'>Add Friend</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[460px]">
                 <DialogHeader>
                     <DialogTitle>Add your Friend</DialogTitle>
                     <DialogDescription>Enter your details about your friend!!</DialogDescription>
                 </DialogHeader>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                    <div className='flex flex-col gap-3'>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                    <div className='flex flex-col gap-2'>
                             <Labels
                                 labelName="Name"
                                 type="text"
@@ -72,7 +72,7 @@ function AddFriend() {
                             />
                     </div>
                     <DialogFooter>
-                        <Button type="submit">Add your Friend!</Button>
+                        <Button type="submit" className='bg-others-primary border-none text-slate-950 hover:bg-[#7581c5]'>Add your Friend!</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
