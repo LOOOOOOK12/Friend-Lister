@@ -8,7 +8,7 @@ import FriendProfile from "@/modals/FriendProfile"
 
 function friendContainer() {
     return (
-        <Card>
+        <Card className="bg-others-container border border-[#303051]">
             <CardHeader className="items-end">
                 <FriendProfile/>
             </CardHeader>
