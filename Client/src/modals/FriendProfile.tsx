@@ -18,10 +18,10 @@ function FriendProfile() {
             <DialogTrigger asChild>
                 <Ellipsis/>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader className='flex gap-5'>
+            <DialogContent className="sm:max-w-[500px]">
+                <DialogHeader className='flex gap-2'>
                     <div className='flex gap-6'>
-                        <img src={JS} className='h-32 w-44 rounded-md' />
+                        <img src={JS} className='h-44 rounded-md' />
                         <div className='flex flex-col gap-3'>
                             <h1>Gender: Bading</h1>
                             <h1>Age: 21</h1>
@@ -31,7 +31,7 @@ function FriendProfile() {
                     <DialogTitle className='text-3xl font-semibold'>Micahel Jackstone</DialogTitle>
                     <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quas velit odio Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quas velit odio </DialogDescription>
                 </DialogHeader>
-                <DialogFooter>
+                <DialogFooter className=''>
                     <EditFriend/>
                     <DeleteFriend/>
                 </DialogFooter>
