@@ -9,4 +9,8 @@ router.get("/:friendId", FriendsController.getFriend)
 
 router.post("/", FriendsController.createFriend)
 
+router.put("/:friendId", )
+
+router.delete("/:friendId", FriendsController.deleteFriend)
+
 export default router;
