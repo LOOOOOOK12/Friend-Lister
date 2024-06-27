@@ -21,6 +21,11 @@ function EditFriend() {
         description:"",
     })
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) =>{
+        event.preventDefault();
+        console.log(editFriend); 
+    }
+
     const handleChange = (key: string, value: string) => {
         setEditFriend(prevState => ({
             ...prevState,
@@ -37,35 +42,39 @@ function EditFriend() {
                 <DialogHeader>
                     <DialogTitle>Edit your friend's details</DialogTitle>
                 </DialogHeader>
-                    <form  className="flex flex-col gap-2">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
                         <Labels
                             labelName="Name"
                             type="text"
                             placeholder="Juan Dela Cruz"
                             value={editFriend.name}
+                            onChange={(value) => handleChange('name', value)}
                         />
                         <Labels
                             labelName="Age"
                             type="text"
                             placeholder="12"
                             value={editFriend.age}
+                            onChange={(value) => handleChange('age', value)}
                         />
                         <Labels
                             labelName="Birthday"
                             type="date"
                             placeholder="12"
                             value={editFriend.birthday}
+                            onChange={(value) => handleChange('birthday', value)}
+                        />
+                        <TextArea
+                            labelName='Describe your Friend'
+                            placeholder="My friend is..."
+                            value={editFriend.description}
+                            onChange={(value) => handleChange('description', value)}
                         />
                         <Labels
                             labelName="Picture"
                             type="file"
                             value={editFriend.picture}
-                        />
-                        <TextArea
-                            labelName='Describe your Friend'
-                            placeholder="My friend is..."
-                            onChange={(value) => handleChange('description', value)}
-                            value={editFriend.description}
+                            onChange={(value) => handleChange('picture', value)}
                         />
                         <DialogFooter>
                             <Button type="submit" className="bg-others-secondary border-none hover:bg-[#5a255a]">Save changes</Button>
