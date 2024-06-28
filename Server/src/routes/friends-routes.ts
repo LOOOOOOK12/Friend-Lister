@@ -9,7 +9,7 @@ router.get("/:friendId", FriendsController.getFriend)
 
 router.post("/", FriendsController.createFriend)
 
-router.put("/:friendId", )
+router.patch("/:friendId",FriendsController.updateFriend)
 
 router.delete("/:friendId", FriendsController.deleteFriend)
 
