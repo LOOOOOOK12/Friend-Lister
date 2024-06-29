@@ -1,8 +1,21 @@
 import './App.css'
 import FriendContainer from './components/containers/friendContainer'
 import Navbar from './components/containers/nav'
+import React, { useEffect } from 'react'
 
 function App() {
+
+
+  useEffect(() => {
+    async function loadFriends(){
+      try {
+        const response = await fetch("http://localhost:5000/api/friends", {method: "GET"})
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    loadFriends()
+  });
 
   return (
     <div className='bg-others-background h-full'>
