@@ -4,7 +4,6 @@ import friendsRoutes from "./routes/friends-routes"
 import morgan from "morgan"
 import createHttpError, { isHttpError } from "http-errors"
 
-
 const app = express()
 
 app.use(morgan("dev"))
