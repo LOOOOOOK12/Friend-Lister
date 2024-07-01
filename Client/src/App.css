@@ -6,6 +6,10 @@
   scroll-behavior: smooth;
 }
 
+html{
+  background-color: #0b0e1a;
+}
+
 input {
   color-scheme: dark;
 }
