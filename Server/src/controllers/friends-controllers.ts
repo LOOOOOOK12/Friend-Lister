@@ -4,7 +4,7 @@ import createHttpError from "http-errors";
 import mongoose from "mongoose";
 
 //Load Friends
-export const getFriends: RequestHandler = async (req,res, next) => {
+export const getFriends: RequestHandler = async (req, res, next) => {
     try{
         const friends = await FriendModel.find().exec()
         res.status(200).json(friends);
