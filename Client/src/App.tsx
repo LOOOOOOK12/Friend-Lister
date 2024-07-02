@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/containers/nav';
 import FriendContainer from './components/containers/friendContainer';
 import { Friends } from './models/friends';
+import * as FriendsApi from "./network/friends_api"
 
 function App() {
     const [friends, setFriends] = useState<Friends[]>([]);
@@ -10,12 +11,8 @@ function App() {
     useEffect(() => {
         async function loadFriends() {
             try {
-                const response = await fetch('/api/friends', { method: 'GET' });
-                if (!response.ok) {
-                    throw new Error('Failed to fetch friends');
-                }
-                const friendsData = await response.json();
-                setFriends(friendsData);
+                const friends = await FriendsApi.fetchFriends();
+                setFriends(friends);
             } catch (error) {
                 console.error('Error fetching friends:', error);
                 alert('Error fetching friends');
