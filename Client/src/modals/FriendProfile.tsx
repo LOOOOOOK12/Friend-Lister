@@ -1,5 +1,5 @@
 import { Ellipsis } from 'lucide-react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
 import EditFriend from './EditFriend';
 import DeleteFriend from './DeleteFriend';
 import { Friends } from '../models/friends';
@@ -24,8 +24,8 @@ function FriendProfile({ friends }: FriendProfileProps) {
                             <div className='flex gap-3'><h1>Gender:</h1><h1>{friends.gender}</h1></div>
                         </div>
                     </div>
-                    <h1 className='text-3xl font-semibold'>Description</h1>
-                    <DialogDescription className='text-2xl'>{friends.description}</DialogDescription>
+                    <h1 className='text-3xl font-semibold'>About your friend:</h1>
+                    <DialogDescription className='text-xl'>{friends.description}</DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
                     <EditFriend/>
