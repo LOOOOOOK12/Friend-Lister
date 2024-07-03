@@ -17,14 +17,11 @@ export async function fetchFriends(): Promise<Friends[]>{
 }
 
 export interface FriendInput {
-    _id?: string,
     name: string,
     age: string,
     gender: string,
     description: string,
     picture: string,
-    createdAt?: string,
-    updatedAt?: string,
 }
 
 export async function createFriend( friend: FriendInput ): Promise<Friends>{
