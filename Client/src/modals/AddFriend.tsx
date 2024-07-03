@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import Labels from '@/components/containers/labels';
 import TextArea from '@/components/containers/textArea';
@@ -27,6 +27,7 @@ function AddFriend() {
         try {
             await createFriend(friend); 
             console.log("Friend added successfully:", friend);
+            window.location.reload();
         } catch (error) {
             console.error("Error adding friend:", error);
         }
@@ -37,10 +38,9 @@ function AddFriend() {
             <DialogTrigger asChild>
                 <Button className='bg-others-secondary border-none hover:bg-[#582358]'>Add Friend</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[460px]">
+            <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
                     <DialogTitle>Add your Friend</DialogTitle>
-                    <DialogDescription>Enter your details about your friend!!</DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2">
                     <div className='flex flex-col gap-2'>
@@ -57,6 +57,13 @@ function AddFriend() {
                                 placeholder="12"
                                 value={friend.age}
                                 onChange={(value) => handleChange('age', value)}
+                            />
+                            <Labels
+                                labelName="Gender"
+                                type="text"
+                                placeholder="12"
+                                value={friend.gender}
+                                onChange={(value) => handleChange('gender', value)}
                             />
                             <Labels
                                 labelName="Birthday"
@@ -79,7 +86,7 @@ function AddFriend() {
                             />
                     </div>
                     <DialogFooter>
-                        <Button type="submit" className='bg-others-primary border-none text-slate-950 hover:bg-[#7581c5]'>Add your Friend!</Button>
+                        <Button type="submit" className='w-full bg-others-primary border-none text-slate-950 hover:bg-[#7581c5]'>Add your Friend!</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
