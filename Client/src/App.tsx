@@ -28,7 +28,7 @@ function App() {
                 <div className="absolute overflow-hidden -z-10 right-[2rem] top-0 size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
                 <div className="absolute overflow-hidden -z-10 left-[2rem] top-[7rem] size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
                 <div className="flex flex-col gap-5 items-center">
-                    <h1 className="text-8xl text-transparent bg-clip-text font-bold inline-block bg-gradient-to-r from-others-primary via-others-secondary to-others-accent">Friend Lister</h1>
+                    <h1 className="text-6xl md:text-8xl text-transparent bg-clip-text font-bold inline-block bg-gradient-to-r from-others-primary via-others-secondary to-others-accent">Friend Lister</h1>
                     <h2 className="text-2xl text-others-text">Add your friends and see the details</h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full h-full">
