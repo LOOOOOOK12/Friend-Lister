@@ -16,6 +16,7 @@ function EditFriend() {
     const [editFriend, setEditFriend] = useState({
         name: '',
         age:'',
+        gender:'',
         birthday:'',
         picture:'',
         description:"",
@@ -57,6 +58,13 @@ function EditFriend() {
                             value={editFriend.age}
                             onChange={(value) => handleChange('age', value)}
                         />
+                        <Labels
+                                labelName="Gender"
+                                type="text"
+                                placeholder="12"
+                                value={editFriend.gender}
+                                onChange={(value) => handleChange('gender', value)}
+                            />
                         <Labels
                             labelName="Birthday"
                             type="date"
