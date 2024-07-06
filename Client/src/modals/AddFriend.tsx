@@ -3,7 +3,11 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogT
 import { Button } from '@/components/ui/button';
 import Labels from '@/components/containers/labels';
 import TextArea from '@/components/containers/textArea';
-import { createFriend } from "@/network/friends_api";
+import { createFriend} from "@/network/friends_api";
+
+interface AddfriendProps{
+    onSubmit:() => void
+}
 
 function AddFriend() {
     const [friend, setFriend] = useState({
@@ -25,9 +29,9 @@ function AddFriend() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            await createFriend(friend); 
-            console.log("Friend added successfully:", friend);
-            window.location.reload();
+                await createFriend(friend); 
+                console.log("Friend added successfully:", friend);
+                window.location.reload();
         } catch (error) {
             console.error("Error adding friend:", error);
         }
