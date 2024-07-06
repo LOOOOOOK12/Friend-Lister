@@ -34,3 +34,17 @@ export async function createFriend( friend: FriendInput ): Promise<Friends>{
     });
     return response.json();
 }
+
+export async function checkFriendExists(friend: { name: string }): Promise<boolean> {
+    const params = new URLSearchParams(friend).toString();
+    const response = await fetch(`/api/friends/check-friend?${params}`, { method: 'GET' });
+    if (!response.ok) {
+        throw new Error(`Server responded with status ${response.status}`);
+    }
+    const data = await response.json();
+    return data.exists;
+}
+
+export async function deleteFriend(friendId: string){
+    await fetchData("api/friends/" + friendId, { method: "DELETE" })
+}
