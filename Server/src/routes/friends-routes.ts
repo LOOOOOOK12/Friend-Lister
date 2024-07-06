@@ -7,6 +7,8 @@ router.get("/" , FriendsController.getFriends)
 
 router.get("/:friendId", FriendsController.getFriend)
 
+// router.get("/check-friend", FriendsController.checkFriends);
+
 router.post("/", FriendsController.createFriend)
 
 router.patch("/:friendId",FriendsController.updateFriend)
