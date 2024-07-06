@@ -68,6 +68,27 @@ export const createFriend: RequestHandler< unknown, unknown, CreateFriendBody, u
     }
 }
 
+//check friend
+// export const checkFriends: RequestHandler = async (req, res, next) => {
+//     const { name } = req.query;
+
+//     try {
+//         if (!name) {
+//             return next(createHttpError(400, "Friend must have a name!"));
+//         }
+
+//         const friend = await FriendModel.findOne({ name: name.toString() });
+
+//         if (friend) {
+//             return res.status(200).json({ exists: true, friend });
+//         } else {
+//             return res.status(200).json({ exists: false });
+//         }
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+
 interface UpdateFriendParams {
     friendId: string,
 }
