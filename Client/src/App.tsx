@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './components/containers/nav';
 import FriendContainer from './components/containers/friendContainer';
 import { Friends } from './models/friends';
-import * as FriendsApi from "./network/friends_api"
+import * as FriendsApi from "./network/friends_api";
 
 function App() {
     const [friends, setFriends] = useState<Friends[]>([]);
