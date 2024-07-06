@@ -6,6 +6,7 @@ import { Friends } from '../models/friends';
 
 interface FriendProfileProps {
     friends: Friends;
+    OnDeleteFriendClicked: (friend: Friends) => void;
 }
 
 function FriendProfile({ friends }: FriendProfileProps) {
@@ -29,7 +30,7 @@ function FriendProfile({ friends }: FriendProfileProps) {
                 </DialogHeader>
                 <DialogFooter className='flex flex-col gap-2'>
                     <EditFriend/>
-                    <DeleteFriend />
+                    <DeleteFriend/>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
