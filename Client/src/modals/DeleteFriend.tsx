@@ -6,10 +6,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-
 import { Button } from "@/components/ui/button"
 
-function DeleteFriend() {
+function DeleteFriend(){
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -20,7 +19,7 @@ function DeleteFriend() {
                     <DialogTitle>Are you sure to delete your friend?</DialogTitle>
                 </DialogHeader>
                 <DialogFooter className="flex items-center justify-center">
-                    <Button type="submit" className="bg-green-500 border-none hover:bg-green-600">Yes</Button>
+                    <Button className="bg-green-500 border-none hover:bg-green-600">Yes</Button>
                     <Button variant="destructive">No</Button>
                 </DialogFooter>
             </DialogContent>
