@@ -3,13 +3,26 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import EditFriend from './EditFriend';
 import DeleteFriend from './DeleteFriend';
 import { Friends } from '../models/friends';
+import * as FriendsApi from "../network/friends_api";
 
 interface FriendProfileProps {
     friends: Friends;
-    OnDeleteFriendClicked: (friend: Friends) => void;
 }
 
-function FriendProfile({ friends }: FriendProfileProps) {
+async function deleteFriend(friends: Friends) {
+    try {
+        await FriendsApi.deleteFriend(friends._id);
+        // You may want to handle further actions like refreshing the list or showing a success message
+    } catch (error) {
+        alert(error);
+    }
+}
+
+const FriendProfile: React.FC<FriendProfileProps> = ({ friends }: FriendProfileProps) => {
+    const handleDeleteFriendClicked = () => {
+        deleteFriend(friends);
+    };
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -18,7 +31,7 @@ function FriendProfile({ friends }: FriendProfileProps) {
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader className="flex gap-2">
                     <div className="flex gap-6 flex-row">
-                        <img src="src\assets\sampleimages\js.png" className="h-44 rounded-md" alt={friends.name} />
+                        <img src="src/assets/sampleimages/js.png" className="h-44 rounded-md" alt={friends.name} />
                         <div className="flex flex-col gap-3">
                             <div className='flex gap-3'><h1>Name:</h1><h1>{friends.name}</h1></div>
                             <div className='flex gap-3'><h1>Age:</h1><h1>{friends.age}</h1></div>
@@ -29,8 +42,8 @@ function FriendProfile({ friends }: FriendProfileProps) {
                     <DialogDescription className='text-xl text-left'>{friends.description}</DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='flex flex-col gap-2'>
-                    <EditFriend/>
-                    <DeleteFriend/>
+                    <EditFriend />
+                    <DeleteFriend onDeleteFriendClicked={handleDeleteFriendClicked} />
                 </DialogFooter>
             </DialogContent>
         </Dialog>
