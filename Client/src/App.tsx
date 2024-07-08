@@ -14,7 +14,6 @@ function App() {
                 const friends = await FriendsApi.fetchFriends();
                 setFriends(friends);
             } catch (error) {
-                console.error('Error fetching friends:', error);
                 alert('Error fetching friends');
             }
         }
