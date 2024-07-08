@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogT
 import { Button } from '@/components/ui/button';
 import Labels from '@/components/containers/labels';
 import TextArea from '@/components/containers/textArea';
-import { createFriend} from "@/network/friends_api";
+import { createFriend } from "@/network/friends_api";
 
 interface AddfriendProps{
     onSubmit:() => void
