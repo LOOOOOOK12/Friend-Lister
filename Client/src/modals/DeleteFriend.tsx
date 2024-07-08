@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -8,23 +9,39 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 
-function DeleteFriend(){
+interface DeleteProps {
+    onDeleteFriendClicked: () => void;
+}
+
+const DeleteFriend: React.FC<DeleteProps> = ({ onDeleteFriendClicked }: DeleteProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleDialogOpen = () => setIsOpen(true);
+    const handleDialogClose = () => setIsOpen(false);
+
+    const handleDeleteClick = () => {
+        onDeleteFriendClicked();
+        handleDialogClose();
+    };
+
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-others-accent border-none hover:bg-[#995177]">Delete</Button>
+                <Button className="bg-others-accent border-none hover:bg-[#995177]" onClick={handleDialogOpen}>
+                    Delete
+                </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] flex flex-col items-center">
                 <DialogHeader>
-                    <DialogTitle>Are you sure to delete your friend?</DialogTitle>
+                    <DialogTitle>Are you sure you want to delete your friend?</DialogTitle>
                 </DialogHeader>
                 <DialogFooter className="flex items-center justify-center">
-                    <Button className="bg-green-500 border-none hover:bg-green-600">Yes</Button>
-                    <Button variant="destructive">No</Button>
+                    <Button className="bg-green-500 border-none hover:bg-green-600" onClick={handleDeleteClick}>Yes</Button>
+                    <Button variant="destructive" onClick={handleDialogClose}>No</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
 
-export default DeleteFriend
+export default DeleteFriend;
