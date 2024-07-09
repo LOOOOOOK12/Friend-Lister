@@ -20,10 +20,19 @@ function App() {
         loadFriends();
     }, []);
 
+    const handleDeleteFriend = async (friendId: string) => {
+        try {
+            await FriendsApi.deleteFriend(friendId);
+            setFriends(friends.filter(friend => friend._id !== friendId));
+        } catch (error) {
+            alert('Error deleting friend');
+        }
+    };
+
     return (
-        <div className="bg-others-background">
-            <Navbar />
+        <div className="bg-others-background h-full">
             <main className="py-28 px-11 w-full h-full z-10 text-center flex flex-col gap-10 items-center justify-center relative overflow-hidden" id="Home">
+                <Navbar />
                 <div className="absolute overflow-hidden -z-10 right-[2rem] top-0 size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
                 <div className="absolute overflow-hidden -z-10 left-[2rem] top-[7rem] size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
                 <div className="flex flex-col gap-5 items-center">
@@ -32,7 +41,7 @@ function App() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full h-full">
                     {friends.map((friend) => (
-                        <FriendContainer key={friend._id} friends={friend} />
+                        <FriendContainer key={friend._id} friends={friend} onDeleteFriend={handleDeleteFriend} />
                     ))}
                 </div>
             </main>
