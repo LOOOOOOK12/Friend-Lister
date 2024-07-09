@@ -5,10 +5,6 @@ import Labels from '@/components/containers/labels';
 import TextArea from '@/components/containers/textArea';
 import { createFriend } from "@/network/friends_api";
 
-interface AddfriendProps{
-    onSubmit:() => void
-}
-
 function AddFriend() {
     const [friend, setFriend] = useState({
         name: '',
