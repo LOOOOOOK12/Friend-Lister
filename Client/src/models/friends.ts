@@ -4,6 +4,7 @@ export interface Friends {
     age: string,
     gender: string,
     description: string,
+    birthday:string,
     picture: string,
     createdAt: string,
     updatedAt: string,
