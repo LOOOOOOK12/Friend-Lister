@@ -3,24 +3,15 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import EditFriend from './EditFriend';
 import DeleteFriend from './DeleteFriend';
 import { Friends } from '../models/friends';
-import * as FriendsApi from "../network/friends_api";
 
 interface FriendProfileProps {
     friends: Friends;
+    onDeleteFriend: (friendId: string) => void;
 }
 
-async function deleteFriend(friends: Friends) {
-    try {
-        await FriendsApi.deleteFriend(friends._id);
-        // You may want to handle further actions like refreshing the list or showing a success message
-    } catch (error) {
-        alert(error);
-    }
-}
-
-const FriendProfile: React.FC<FriendProfileProps> = ({ friends }: FriendProfileProps) => {
+const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }: FriendProfileProps) => {
     const handleDeleteFriendClicked = () => {
-        deleteFriend(friends);
+        onDeleteFriend(friends._id);
     };
 
     return (
@@ -42,7 +33,7 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends }: FriendProfileP
                     <DialogDescription className='text-xl text-left'>{friends.description}</DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='flex flex-col gap-2'>
-                    <EditFriend />
+                    <EditFriend friendData={friends} />
                     <DeleteFriend onDeleteFriendClicked={handleDeleteFriendClicked} />
                 </DialogFooter>
             </DialogContent>
