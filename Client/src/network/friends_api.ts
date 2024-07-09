@@ -45,6 +45,18 @@ export async function checkFriendExists(friend: { name: string }): Promise<boole
     return data.exists;
 }
 
+export async function updateFriend(friendId: string, friend: FriendInput): Promise<Friends> {
+    const response = await fetchData("/api/friends/" + friendId,
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(friend)
+        })
+    return response.json()
+}
+
 export async function deleteFriend(friendId: string){
     await fetchData("api/friends/" + friendId, { method: "DELETE" })
 }
