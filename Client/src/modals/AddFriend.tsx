@@ -4,8 +4,13 @@ import { Button } from '@/components/ui/button';
 import Labels from '@/components/containers/labels';
 import TextArea from '@/components/containers/textArea';
 import { createFriend } from "@/network/friends_api";
+import { Friends } from "@/models/friends"; // Import Friends type
 
-function AddFriend() {
+interface AddFriendProps {
+    onAddFriend: (newFriend: Friends) => void;
+}
+
+function AddFriend({ onAddFriend }: AddFriendProps) {
     const [friend, setFriend] = useState({
         name: '',
         age: '',
@@ -14,6 +19,7 @@ function AddFriend() {
         picture: '',
         description:'',
     });
+    const [isOpen, setIsOpen] = useState(false); 
 
     const handleChange = (key: string, value: string) => {
         setFriend(prevState => ({
@@ -25,18 +31,19 @@ function AddFriend() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-                await createFriend(friend); 
-                console.log("Friend added successfully:", friend);
-                window.location.reload();
+            const newFriend = await createFriend(friend); 
+            console.log("Friend added successfully:", newFriend);
+            onAddFriend(newFriend);
+            setIsOpen(false);
         } catch (error) {
             console.error("Error adding friend:", error);
         }
     };
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className='bg-others-secondary border-none hover:bg-[#582358]'>Add Friend</Button>
+                <Button className='bg-others-secondary border-none hover:bg-[#582358]' onClick={() => setIsOpen(true)}>Add Friend</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
