@@ -8,11 +8,13 @@ import {
 } from "@/components/ui/dialog"
 import Labels from "@/components/containers/labels"
 import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import TextArea from '@/components/containers/textArea';
+import { updateFriend } from '@/network/friends_api'; // Adjust the import path as necessary
 
 interface EditFriendProps {
-    friendData: {
+    friendId: string;
+    initialFriendData: {
         name: string;
         age: string;
         gender: string;
@@ -22,24 +24,19 @@ interface EditFriendProps {
     };
 }
 
-function EditFriend({ friendData }: EditFriendProps) {
+function EditFriend({ friendId, initialFriendData }: EditFriendProps) {
 
-    const [editFriend, setEditFriend] = useState({
-        name: '',
-        age: '',
-        gender: '',
-        birthday: '',
-        picture: '',
-        description: "",
-    });
+    const [editFriend, setEditFriend] = useState(initialFriendData);
 
-    useEffect(() => {
-        setEditFriend(friendData);
-    }, [friendData]);
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(editFriend);
+        try {
+            await updateFriend(friendId, editFriend);
+            console.log("Friend updated successfully:", editFriend);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error updating friend:", error);
+        }
     }
 
     const handleChange = (key: string, value: string) => {
@@ -48,6 +45,10 @@ function EditFriend({ friendData }: EditFriendProps) {
             [key]: value,
         }));
     };
+
+    useEffect(() => {
+        setEditFriend(initialFriendData);
+    }, [initialFriendData]);
 
     return (
         <Dialog>
@@ -63,40 +64,40 @@ function EditFriend({ friendData }: EditFriendProps) {
                         labelName="Name"
                         type="text"
                         placeholder="Juan Dela Cruz"
-                        value={editFriend.name || ''}
+                        value={editFriend.name}
                         onChange={(value) => handleChange('name', value)}
                     />
                     <Labels
                         labelName="Age"
                         type="text"
                         placeholder="12"
-                        value={editFriend.age || ''}
+                        value={editFriend.age}
                         onChange={(value) => handleChange('age', value)}
                     />
                     <Labels
                         labelName="Gender"
                         type="text"
-                        placeholder="Gender"
-                        value={editFriend.gender || ''}
+                        placeholder="12"
+                        value={editFriend.gender}
                         onChange={(value) => handleChange('gender', value)}
                     />
                     <Labels
                         labelName="Birthday"
                         type="date"
-                        placeholder="Birthday"
-                        value={editFriend.birthday || ''}
+                        placeholder="12"
+                        value={editFriend.birthday}
                         onChange={(value) => handleChange('birthday', value)}
                     />
                     <TextArea
                         labelName='Describe your Friend'
                         placeholder="My friend is..."
-                        value={editFriend.description || ''}
+                        value={editFriend.description}
                         onChange={(value) => handleChange('description', value)}
                     />
                     <Labels
                         labelName="Picture"
                         type="file"
-                        value={editFriend.picture || ''}
+                        value={editFriend.picture}
                         onChange={(value) => handleChange('picture', value)}
                     />
                     <DialogFooter>
@@ -105,7 +106,7 @@ function EditFriend({ friendData }: EditFriendProps) {
                 </form>
             </DialogContent>
         </Dialog>
-    );
+    )
 }
 
 export default EditFriend;
