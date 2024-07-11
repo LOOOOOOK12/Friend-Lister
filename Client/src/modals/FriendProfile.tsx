@@ -33,7 +33,17 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
                     <DialogDescription className='text-xl text-left'>{friends.description}</DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='flex flex-col gap-2'>
-                    <EditFriend friendData={friends} />
+                    <EditFriend
+                        friendId={friends._id}
+                        initialFriendData={{
+                            name: friends.name,
+                            age: friends.age,
+                            gender: friends.gender,
+                            birthday: friends.birthday,
+                            picture: friends.picture,
+                            description: friends.description
+                        }}
+                    />
                     <DeleteFriend onDeleteFriendClicked={handleDeleteFriendClicked} />
                 </DialogFooter>
             </DialogContent>
