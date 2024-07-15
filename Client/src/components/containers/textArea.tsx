@@ -5,7 +5,7 @@ import { Label } from '@radix-ui/react-label';
 interface Props {
     labelName: string;
     placeholder?: string;
-    value: string;
+    value?: string;
     onChange?: (value: string) => void;
 }
 
@@ -24,7 +24,7 @@ function TextArea({ labelName, placeholder, value, onChange }: Props) {
                 className=' w-full'
                 placeholder={placeholder}
                 onChange={handleChange}
-                value={value.toString()}
+                value={value}
             />
         </div>
     );
