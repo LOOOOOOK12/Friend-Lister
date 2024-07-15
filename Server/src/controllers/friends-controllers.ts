@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import FriendModel from "../models/friend";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
+import upload from '../Middleware/middleware';
 
 //Load Friends
 export const getFriends: RequestHandler = async (req, res, next) => {
@@ -42,31 +43,34 @@ interface CreateFriendBody {
 }
 
 //create Friend function
-export const createFriend: RequestHandler< unknown, unknown, CreateFriendBody, unknown > = async (req, res, next) => {
-    const name = req.body.name
-    const age = req.body.age
-    const gender = req.body.gender
-    const description = req.body.description
-    const picture = req.body.picture
-
-    try {
-        if(!name){
-            throw createHttpError(400,"Friend must have a Name!!")
+export const createFriend: RequestHandler = (req, res, next) => {
+    upload(req, res, async function (err) {
+        if (err) {
+            return next(createHttpError(400, err.message));
         }
 
-        const newFriend = await FriendModel.create({
-            name: name,
-            age: age,
-            gender: gender,
-            description: description,
-            picture : picture
-        })
+        const { name, age, gender, description } = req.body;
+        const picture = req.file ? req.file.path : undefined;
 
-        res.status(201).json(newFriend)
-    } catch (error) {
-        next(error)
-    }
-}
+        try {
+            if (!name) {
+                throw createHttpError(400, "Friend must have a Name!!");
+            }
+
+            const newFriend = await FriendModel.create({
+                name,
+                age,
+                gender,
+                description,
+                picture
+            });
+
+            res.status(201).json(newFriend);
+        } catch (error) {
+            next(error);
+        }
+    });
+};
 
 //check friend
 // export const checkFriends: RequestHandler = async (req, res, next) => {
@@ -149,7 +153,7 @@ export const deleteFriend: RequestHandler = async ( req, res, next )=> {
             throw createHttpError(400, "Invalid Friend ID")
         }
 
-        const friend = await FriendModel.findById(friendId).exec()
+        const friend = await FriendModel.findByIdAndDelete(friendId).exec()
 
         if(!friend){
             throw createHttpError(404, "Friend not found")
