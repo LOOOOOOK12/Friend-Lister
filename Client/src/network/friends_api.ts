@@ -1,36 +1,36 @@
 import { Friends } from "@/models/friends";
 
 async function fetchData(input: RequestInfo, init?: RequestInit) {
-    const response = await fetch (input, init);
-    if(response.ok){
-        return response
+    const response = await fetch(input, init);
+    if (response.ok) {
+        return response;
     } else {
-        const errorBody = await response.json()
+        const errorBody = await response.json();
         const errorMessage = errorBody.error;
         throw Error(errorMessage);
     }
 }
 
-export async function fetchFriends(): Promise<Friends[]>{
+export async function fetchFriends(): Promise<Friends[]> {
     const response = await fetch('/api/friends', { method: 'GET' });
     return response.json();
 }
 
 export interface FriendInput {
+    _id?: string,
     name: string,
     age: string,
     gender: string,
     description: string,
-    picture: string,
+    picture?: File,
+    createdAt?: string,
+    updatedAt?: string,
 }
 
-export async function createFriend( friend: FriendInput ): Promise<Friends>{
-    const response = await fetchData("/api/friends",{
+export async function createFriend(friend: FormData): Promise<Friends> {
+    const response = await fetchData("/api/friends", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(friend),
+        body: friend,
     });
     return response.json();
 }
@@ -46,17 +46,16 @@ export async function checkFriendExists(friend: { name: string }): Promise<boole
 }
 
 export async function updateFriend(friendId: string, friend: FriendInput): Promise<Friends> {
-    const response = await fetchData("/api/friends/" + friendId,
-        {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(friend)
-        })
-    return response.json()
+    const response = await fetchData("/api/friends/" + friendId, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(friend)
+    });
+    return response.json();
 }
 
-export async function deleteFriend(friendId: string){
-    await fetchData("api/friends/" + friendId, { method: "DELETE" })
+export async function deleteFriend(friendId: string) {
+    await fetchData("api/friends/" + friendId, { method: "DELETE" });
 }
