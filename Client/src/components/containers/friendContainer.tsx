@@ -13,14 +13,15 @@ interface FriendContainerProps {
 }
 
 const FriendContainer: React.FC<FriendContainerProps> = ({ friends, onDeleteFriend }) => {
-    
     return (
         <Card className="bg-others-container border border-[#303051] bg-opacity-75 backdrop-blur">
             <CardHeader className="items-end">
                 <FriendProfile friends={friends} onDeleteFriend={onDeleteFriend} />
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center gap-4">
-                <img src="src/assets/sampleimages/js.png" alt="test" className="w-full rounded-md" />
+                {friends.picture && (
+                    <img src={`/uploads/${friends.picture}`} alt={friends.name} className="w-full rounded-md" />
+                )}
                 <CardTitle>{friends.name}</CardTitle>
             </CardContent>
         </Card>
