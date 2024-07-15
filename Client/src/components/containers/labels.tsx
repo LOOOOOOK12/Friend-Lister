@@ -8,11 +8,14 @@ interface Props {
     placeholder?: string;
     value: string | number;
     onChange?: (value: string) => void;
+    onFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Labels({ labelName, type, placeholder, value, onChange }: Props) {
+function Labels({ labelName, type, placeholder, value, onChange, onFileChange }: Props) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (onChange) {
+        if (type === 'file' && onFileChange) {
+            onFileChange(event);
+        } else if (onChange) {
             onChange(event.target.value);
         }
     };
@@ -28,7 +31,7 @@ function Labels({ labelName, type, placeholder, value, onChange }: Props) {
                 placeholder={placeholder}
                 type={type}
                 onChange={handleChange}
-                value={displayValue}
+                value={type !== 'file' ? displayValue : ''}
                 className="col-span-3"
             />
         </div>
