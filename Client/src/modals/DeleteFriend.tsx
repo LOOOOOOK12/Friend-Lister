@@ -22,7 +22,6 @@ const DeleteFriend: React.FC<DeleteProps> = ({ onDeleteFriendClicked }: DeletePr
     const handleDeleteClick = () => {
         onDeleteFriendClicked();
         handleDialogClose();
-        
     };
 
     return (
