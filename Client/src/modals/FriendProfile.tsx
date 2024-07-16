@@ -17,16 +17,31 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Ellipsis />
+                <Ellipsis className='hover:bg-[#191d31] transition duration-150 rounded-md'/>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader className="flex gap-2">
                     <div className="flex gap-6 flex-row">
-                        <img src="src/assets/sampleimages/js.png" className="h-44 rounded-md" alt={friends.name} />
+                        {friends.picture && (
+                            <img 
+                                src={friends.picture} 
+                                className="h-44 rounded-md" 
+                                alt={friends.name} 
+                            />
+                        )}
                         <div className="flex flex-col gap-3">
-                            <div className='flex gap-3'><h1>Name:</h1><h1>{friends.name}</h1></div>
-                            <div className='flex gap-3'><h1>Age:</h1><h1>{friends.age}</h1></div>
-                            <div className='flex gap-3'><h1>Gender:</h1><h1>{friends.gender}</h1></div>
+                            <div className='flex gap-3'>
+                                <h1>Name:</h1>
+                                <h1>{friends.name}</h1>
+                            </div>
+                            <div className='flex gap-3'>
+                                <h1>Age:</h1>
+                                <h1>{friends.age}</h1>
+                            </div>
+                            <div className='flex gap-3'>
+                                <h1>Gender:</h1>
+                                <h1>{friends.gender}</h1>
+                            </div>
                         </div>
                     </div>
                     <h1 className='text-left text-3xl font-semibold'>About your friend:</h1>
