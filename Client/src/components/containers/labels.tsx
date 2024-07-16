@@ -6,7 +6,7 @@ interface Props {
     labelName: string;
     type: string;
     placeholder?: string;
-    value: string | number;
+    value?: string | number;
     onChange?: (value: string) => void;
     onFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -27,11 +27,12 @@ function Labels({ labelName, type, placeholder, value, onChange, onFileChange }:
         <div className="flex flex-col gap-2">
             <Label>{labelName}</Label>
             <Input
+                accept='image/*'
                 id={labelName.toLowerCase()}
-                placeholder={placeholder}
+                placeholder={type !== 'file' ? placeholder : undefined}
                 type={type}
                 onChange={handleChange}
-                value={type !== 'file' ? displayValue : ''}
+                value={type !== 'file' ? displayValue : undefined}
                 className="col-span-3"
             />
         </div>
