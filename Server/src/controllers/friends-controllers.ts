@@ -2,7 +2,6 @@ import { RequestHandler } from "express";
 import FriendModel from "../models/friend";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
-import upload from '../Middleware/middleware';
 
 //Load Friends
 export const getFriends: RequestHandler = async (req, res, next) => {
@@ -43,33 +42,26 @@ interface CreateFriendBody {
 }
 
 //create Friend function
-export const createFriend: RequestHandler = (req, res, next) => {
-    upload(req, res, async function (err) {
-        if (err) {
-            return next(createHttpError(400, err.message));
+export const createFriend: RequestHandler = async (req, res, next) => {
+    const { name, age, gender, description, picture } = req.body;
+
+    try {
+        if (!name) {
+            throw createHttpError(400, "Friend must have a Name!!");
         }
 
-        const { name, age, gender, description } = req.body;
-        const picture = req.file ? req.file.path : undefined;
+        const newFriend = await FriendModel.create({
+            name,
+            age,
+            gender,
+            description,
+            picture,
+        });
 
-        try {
-            if (!name) {
-                throw createHttpError(400, "Friend must have a Name!!");
-            }
-
-            const newFriend = await FriendModel.create({
-                name,
-                age,
-                gender,
-                description,
-                picture
-            });
-
-            res.status(201).json(newFriend);
-        } catch (error) {
-            next(error);
-        }
-    });
+        res.status(201).json(newFriend);
+    } catch (error) {
+        next(error);
+    }
 };
 
 //check friend
