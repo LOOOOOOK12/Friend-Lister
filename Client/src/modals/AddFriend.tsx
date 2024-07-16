@@ -19,7 +19,6 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
         picture: '',
         description: '',
     });
-    const [file, setFile] = useState<File | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleChange = (key: string, value: string) => {
@@ -30,23 +29,23 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
     };
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0]) {
-            setFile(event.target.files[0]);
-            handleChange('picture', event.target.files[0].name);
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result?.toString();
+                if (base64String) {
+                    handleChange('picture', base64String);
+                }
+            };
+            reader.readAsDataURL(file);
         }
     };
-    
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const formData = new FormData();
-        Object.keys(friend).forEach(key => {
-            formData.append(key, (friend as any)[key]);
-        });
-        if (file) {
-            formData.append('picture', file);
-        }
         try {
-            const newFriend = await createFriend(formData);
+            const newFriend = await createFriend(friend);
             console.log("Friend added successfully:", newFriend);
             onAddFriend(newFriend);
             setIsOpen(false);
@@ -103,7 +102,6 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                         <Labels
                             labelName="Picture"
                             type="file"
-                            value={friend.picture}
                             onFileChange={handleFileChange}
                         />
                     </div>
