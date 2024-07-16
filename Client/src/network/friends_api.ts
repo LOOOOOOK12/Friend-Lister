@@ -22,18 +22,22 @@ export interface FriendInput {
     age: string,
     gender: string,
     description: string,
-    picture?: File,
+    picture?: string,
     createdAt?: string,
     updatedAt?: string,
 }
 
-export async function createFriend(friend: FormData): Promise<Friends> {
-    const response = await fetchData("/api/friends", {
+export async function createFriend(friend: FriendInput): Promise<Friends> {
+    const response = await fetch("/api/friends", {
         method: "POST",
-        body: friend,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(friend),
     });
     return response.json();
 }
+
 
 export async function checkFriendExists(friend: { name: string }): Promise<boolean> {
     const params = new URLSearchParams(friend).toString();
