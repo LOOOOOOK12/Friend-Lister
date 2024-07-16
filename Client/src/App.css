@@ -13,3 +13,22 @@ html{
 input {
   color-scheme: dark;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bf6695;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8a4369;
+  transition: 0.5s;
+  transition: ease-in;
+}
