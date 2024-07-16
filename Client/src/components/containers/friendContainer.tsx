@@ -3,8 +3,8 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-import FriendProfile from "@/modals/FriendProfile"
+} from "@/components/ui/card";
+import FriendProfile from "@/modals/FriendProfile";
 import { Friends } from '../../models/friends';
 
 interface FriendContainerProps {
@@ -20,7 +20,7 @@ const FriendContainer: React.FC<FriendContainerProps> = ({ friends, onDeleteFrie
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center gap-4">
                 {friends.picture && (
-                    <img src={`/uploads/${friends.picture}`} alt={friends.name} className="w-full rounded-md" />
+                    <img src={friends.picture} alt={friends.name} className="w-full rounded-md" />
                 )}
                 <CardTitle>{friends.name}</CardTitle>
             </CardContent>
