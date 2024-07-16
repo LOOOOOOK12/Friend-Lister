@@ -4,6 +4,7 @@ import Navbar from './components/containers/nav';
 import FriendContainer from './components/containers/friendContainer';
 import { Friends } from './models/friends';
 import * as FriendsApi from "./network/friends_api";
+import { MoveUp } from 'lucide-react';
 
 function App() {
     const [friends, setFriends] = useState<Friends[]>([]);
@@ -48,6 +49,7 @@ function App() {
                         <FriendContainer key={friend._id} friends={friend} onDeleteFriend={handleDeleteFriend} />
                     ))}
                 </div>
+                <a href="#Home" className='fixed bottom-0 right-0 m-2 rounded-full border border-[#303051] p-2' ><MoveUp/></a>
             </main>
         </div>
     );
