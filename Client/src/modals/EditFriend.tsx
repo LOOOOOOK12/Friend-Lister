@@ -5,12 +5,12 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import Labels from "@/components/containers/labels"
-import { Button } from "@/components/ui/button"
-import { useState, useEffect } from "react"
+} from "@/components/ui/dialog";
+import Labels from "@/components/containers/labels";
+import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 import TextArea from '@/components/containers/textArea';
-import { updateFriend } from '@/network/friends_api'; // Adjust the import path as necessary
+import { updateFriend } from '@/network/friends_api'; 
 
 interface EditFriendProps {
     friendId: string;
@@ -27,6 +27,28 @@ interface EditFriendProps {
 function EditFriend({ friendId, initialFriendData }: EditFriendProps) {
 
     const [editFriend, setEditFriend] = useState(initialFriendData);
+    const [file, setFile] = useState<File | null>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            setFile(event.target.files[0]);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEditFriend(prevState => ({
+                    ...prevState,
+                    picture: reader.result as string,
+                }));
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    };
+
+    const handleChange = (key: string, value: string) => {
+        setEditFriend(prevState => ({
+            ...prevState,
+            [key]: value,
+        }));
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -37,13 +59,6 @@ function EditFriend({ friendId, initialFriendData }: EditFriendProps) {
         } catch (error) {
             console.error("Error updating friend:", error);
         }
-    }
-
-    const handleChange = (key: string, value: string) => {
-        setEditFriend(prevState => ({
-            ...prevState,
-            [key]: value,
-        }));
     };
 
     useEffect(() => {
@@ -77,7 +92,7 @@ function EditFriend({ friendId, initialFriendData }: EditFriendProps) {
                     <Labels
                         labelName="Gender"
                         type="text"
-                        placeholder="12"
+                        placeholder="Male/Female/Other"
                         value={editFriend.gender}
                         onChange={(value) => handleChange('gender', value)}
                     />
@@ -97,8 +112,7 @@ function EditFriend({ friendId, initialFriendData }: EditFriendProps) {
                     <Labels
                         labelName="Picture"
                         type="file"
-                        value={editFriend.picture}
-                        onChange={(value) => handleChange('picture', value)}
+                        onFileChange={handleFileChange}
                     />
                     <DialogFooter>
                         <Button type="submit" className="bg-others-secondary border-none hover:bg-[#5a255a]">Save changes</Button>
@@ -106,7 +120,7 @@ function EditFriend({ friendId, initialFriendData }: EditFriendProps) {
                 </form>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
 
 export default EditFriend;
