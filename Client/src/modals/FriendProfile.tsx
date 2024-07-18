@@ -21,7 +21,7 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader className="flex gap-2">
-                    <div className="flex gap-6 flex-row">
+                    <div className="flex gap-6 flex-row items-center">
                         {friends.picture && (
                             <img 
                                 src={friends.picture} 
