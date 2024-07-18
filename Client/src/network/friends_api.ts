@@ -63,3 +63,19 @@ export async function updateFriend(friendId: string, friend: FriendInput): Promi
 export async function deleteFriend(friendId: string) {
     await fetchData("api/friends/" + friendId, { method: "DELETE" });
 }
+
+export async function findFriends(name: string): Promise<Friends[]> {
+    const response = await fetch(`/api/friends/find`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to find friend");
+    }
+
+    return response.json();
+}
