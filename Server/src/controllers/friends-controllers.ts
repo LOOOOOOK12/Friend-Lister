@@ -140,11 +140,9 @@ export const deleteFriend: RequestHandler = async ( req, res, next )=> {
     const friendId = req.params.friendId
 
     try {
-
         if(!mongoose.isValidObjectId(friendId)){
             throw createHttpError(400, "Invalid Friend ID")
         }
-
         const friend = await FriendModel.findByIdAndDelete(friendId).exec()
 
         if(!friend){
@@ -157,3 +155,34 @@ export const deleteFriend: RequestHandler = async ( req, res, next )=> {
         next(error)
     }
 }
+
+export const findFriendById: RequestHandler = async (req, res, next) => {
+    const friendId = req.params.friendId;
+
+    try {
+        if (!mongoose.isValidObjectId(friendId)) {
+            throw createHttpError(400, "Invalid Friend ID");
+        }
+
+        const friend = await FriendModel.findById(friendId).exec();
+        if (!friend) {
+            throw createHttpError(404, "Friend not found");
+        }
+
+        res.status(200).json(friend);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Search friends by name
+export const findFriendsByName: RequestHandler = async (req, res, next) => {
+    const { name } = req.body;
+
+    try {
+        const friends = await FriendModel.find({ name: { $regex: name, $options: "i" } }).exec();
+        res.status(200).json(friends);
+    } catch (error) {
+        next(error);
+    }
+};
