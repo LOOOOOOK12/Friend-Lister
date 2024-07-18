@@ -20,7 +20,7 @@ const FriendContainer: React.FC<FriendContainerProps> = ({ friends, onDeleteFrie
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center gap-4">
                 {friends.picture && (
-                    <img src={friends.picture} alt={friends.name} className="w-full rounded-md" />
+                    <img src={friends.picture} alt={friends.name} className="w-full h-72 rounded-md" />
                 )}
                 <CardTitle>{friends.name}</CardTitle>
             </CardContent>
