@@ -77,7 +77,7 @@ function App() {
                             ))}
                         </div>
                     ) : (
-                        <h1 className="text-2xl text-others-text">Result not found</h1>
+                        <h1 className="text-2xl text-others-text">Friend not found</h1>
                     )
                 )}
                 <a href="#Home" className='fixed bottom-0 right-0 m-2 rounded-full border border-[#303051] p-2' ><MoveUp /></a>
