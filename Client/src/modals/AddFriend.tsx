@@ -41,7 +41,7 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
             reader.readAsDataURL(file);
         }
     };
-
+    
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
