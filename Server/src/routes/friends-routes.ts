@@ -15,4 +15,8 @@ router.patch("/:friendId",FriendsController.updateFriend)
 
 router.delete("/:friendId", FriendsController.deleteFriend)
 
+router.post("/find", FriendsController.findFriendsByName);
+
+router.get("/:friendId", FriendsController.findFriendById);
+
 export default router;
