@@ -1,4 +1,3 @@
-import React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
@@ -11,7 +10,8 @@ interface Props {
     onFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Labels({ labelName, type, placeholder, value, onChange, onFileChange }: Props) {
+function Labels({ labelName, type, placeholder, value, onChange, onFileChange}: Props) {
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (type === 'file' && onFileChange) {
             onFileChange(event);
@@ -20,7 +20,6 @@ function Labels({ labelName, type, placeholder, value, onChange, onFileChange }:
         }
     };
 
-    // Ensure value is a string before passing it to Input component
     const displayValue = value !== null && value !== undefined ? value.toString() : '';
 
     return (
@@ -33,7 +32,7 @@ function Labels({ labelName, type, placeholder, value, onChange, onFileChange }:
                 type={type}
                 onChange={handleChange}
                 value={type !== 'file' ? displayValue : undefined}
-                className="col-span-3"
+                className="col-span-3 "
             />
         </div>
     );
