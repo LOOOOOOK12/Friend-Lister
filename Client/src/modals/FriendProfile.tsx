@@ -25,7 +25,7 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
                         {friends.picture && (
                             <img 
                                 src={friends.picture} 
-                                className="h-44 rounded-md" 
+                                className="h-40 rounded-md" 
                                 alt={friends.name} 
                             />
                         )}
@@ -44,7 +44,7 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
                             </div>
                         </div>
                     </div>
-                    <h1 className='text-left text-3xl font-semibold'>About your friend:</h1>
+                    <h1 className='text-left text-2xl font-semibold'>About your friend:</h1>
                     <DialogDescription className='text-xl text-left'>{friends.description}</DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='flex flex-col gap-2'>
