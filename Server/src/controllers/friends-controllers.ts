@@ -97,6 +97,7 @@ interface UpdateFriendBody {
     picture?: string,
 }
 
+//update friend
 export const updateFriend: RequestHandler <UpdateFriendParams, unknown, UpdateFriendBody, unknown> = async (req, res, next ) => {
     const friendId = req.params.friendId
     const newName = req.body.name
@@ -156,6 +157,7 @@ export const deleteFriend: RequestHandler = async ( req, res, next )=> {
     }
 }
 
+//search friend by id
 export const findFriendById: RequestHandler = async (req, res, next) => {
     const friendId = req.params.friendId;
 
