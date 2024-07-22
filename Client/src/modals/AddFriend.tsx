@@ -12,7 +12,7 @@ interface AddFriendProps {
 }
 
 function AddFriend({ onAddFriend }: AddFriendProps) {
-    const { control, handleSubmit, reset } = useForm<Friends>();
+    const { control, handleSubmit, reset, formState: { errors } } = useForm<Friends>();
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -56,66 +56,89 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                         <Controller
                             name="name"
                             control={control}
-                            rules={{required: true}}
+                            rules={{ required: 'Name is required' }}
                             render={({ field }) => (
-                                <Labels
-                                    labelName="Name"
-                                    type="text"
-                                    placeholder="Juan Dela Cruz"
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                />
+                                <>
+                                    <Labels
+                                        labelName="Name"
+                                        type="text"
+                                        placeholder="Juan Dela Cruz"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        className={errors.name ? 'border-red-500' : ''}
+                                    />
+                                    {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+                                </>
                             )}
                         />
                         <Controller
                             name="age"
                             control={control}
+                            rules={{ required: 'Age is required', pattern: { value: /^[0-9]+$/, message: 'Age must be a number' } }}
                             render={({ field }) => (
-                                <Labels
-                                    labelName="Age"
-                                    type="text"
-                                    placeholder="12"
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                />
+                                <>
+                                    <Labels
+                                        labelName="Age"
+                                        type="text"
+                                        placeholder="12"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        className={errors.age ? 'border-red-500' : ''}
+                                    />
+                                    {errors.age && <p className="text-red-500">{errors.age.message}</p>}
+                                </>
                             )}
                         />
                         <Controller
                             name="gender"
                             control={control}
+                            rules={{ required: 'Gender is required' }}
                             render={({ field }) => (
-                                <Labels
-                                    labelName="Gender"
-                                    type="text"
-                                    placeholder="Male/Female"
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                />
+                                <>
+                                    <Labels
+                                        labelName="Gender"
+                                        type="text"
+                                        placeholder="Male/Female"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        className={errors.gender ? 'border-red-500' : ''}
+                                    />
+                                    {errors.gender && <p className="text-red-500">{errors.gender.message}</p>}
+                                </>
                             )}
                         />
                         <Controller
                             name="birthday"
                             control={control}
+                            rules={{ required: 'Birthday is required' }}
                             render={({ field }) => (
-                                <Labels
-                                    labelName="Birthday"
-                                    type="date"
-                                    placeholder="12"
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                />
+                                <>
+                                    <Labels
+                                        labelName="Birthday"
+                                        type="date"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        className={errors.birthday ? 'border-red-500' : ''}
+                                    />
+                                    {errors.birthday && <p className="text-red-500">{errors.birthday.message}</p>}
+                                </>
                             )}
                         />
                         <Controller
                             name="description"
                             control={control}
+                            rules={{ required: 'Description is required' }}
                             render={({ field }) => (
-                                <TextArea
-                                    labelName='Describe your Friend'
-                                    placeholder="My friend is..."
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                />
+                                <>
+                                    <TextArea
+                                        labelName='Describe your Friend'
+                                        placeholder="My friend is..."
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        className={errors.description ? 'border-red-500' : ''}
+                                    />
+                                    {errors.description && <p className="text-red-500">{errors.description.message}</p>}
+                                </>
                             )}
                         />
                         <Controller
