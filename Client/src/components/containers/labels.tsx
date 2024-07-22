@@ -8,9 +8,10 @@ interface Props {
     value?: string | number;
     onChange?: (value: string) => void;
     onFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    className?: string;
 }
 
-function Labels({ labelName, type, placeholder, value, onChange, onFileChange}: Props) {
+function Labels({ labelName, type, placeholder, value, onChange, onFileChange, className}: Props) {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (type === 'file' && onFileChange) {
@@ -32,7 +33,7 @@ function Labels({ labelName, type, placeholder, value, onChange, onFileChange}: 
                 type={type}
                 onChange={handleChange}
                 value={type !== 'file' ? displayValue : undefined}
-                className="col-span-3 "
+                className={`col-span-3 ${className}`}
             />
         </div>
     );
