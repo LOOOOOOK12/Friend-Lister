@@ -22,13 +22,15 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader className="flex gap-2">
                     <div className="flex gap-6 flex-row items-center">
-                        {friends.picture && (
-                            <img 
-                                src={friends.picture} 
-                                className="h-40 rounded-md" 
-                                alt={friends.name} 
-                            />
-                        )}
+                        <div className='h-40'>
+                            {friends.picture && (
+                                <img 
+                                    src={friends.picture} 
+                                    className="h-full w-full bg-contain rounded-md" 
+                                    alt={friends.name} 
+                                />
+                            )}
+                        </div>
                         <div className="flex flex-col gap-3">
                             <div className='flex gap-3'>
                                 <h1>Name:</h1>
@@ -47,7 +49,7 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
                     <h1 className='text-left text-2xl font-semibold'>About your friend:</h1>
                     <DialogDescription className='text-xl text-left'>{friends.description}</DialogDescription>
                 </DialogHeader>
-                <DialogFooter className='flex flex-col gap-2'>
+                <DialogFooter className='flex flex-col'>
                     <EditFriend
                         friendId={friends._id}
                         initialFriendData={{
