@@ -7,9 +7,10 @@ interface Props {
     placeholder?: string;
     value?: string;
     onChange?: (value: string) => void;
+    className: string;
 }
 
-function TextArea({ labelName, placeholder, value, onChange }: Props) {
+function TextArea({ labelName, placeholder, value, onChange, className }: Props) {
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (onChange) {
@@ -21,10 +22,10 @@ function TextArea({ labelName, placeholder, value, onChange }: Props) {
         <div className="flex flex-col gap-2">
             <Label>{labelName}</Label>
             <Textarea
-                className='w-full'
-                placeholder={placeholder}
+                className={`col-span-3 w-full ${className}`} placeholder={placeholder}
                 onChange={handleChange}
                 value={value}
+                
             />
         </div>
     );
