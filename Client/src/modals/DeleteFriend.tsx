@@ -35,7 +35,7 @@ const DeleteFriend: React.FC<DeleteProps> = ({ onDeleteFriendClicked }: DeletePr
                 <DialogHeader>
                     <DialogTitle>Are you sure you want to delete your friend?</DialogTitle>
                 </DialogHeader>
-                <DialogFooter className="flex items-center justify-center">
+                <DialogFooter className="flex flex-row items-center justify-center gap-2">
                     <Button className="bg-green-500 border-none hover:bg-green-600" onClick={handleDeleteClick}>Yes</Button>
                     <Button variant="destructive" onClick={handleDialogClose}>No</Button>
                 </DialogFooter>
