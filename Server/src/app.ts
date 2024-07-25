@@ -3,15 +3,11 @@ import express, { Request, Response, NextFunction } from 'express';
 import friendsRoutes from './routes/friends-routes';
 import morgan from 'morgan';
 import createHttpError, { isHttpError } from 'http-errors';
-import path from 'path';
 
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
-
-// Serve static files from the 'uploads' directory
-app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/friends', friendsRoutes);
 
