@@ -33,13 +33,13 @@ export const getFriend: RequestHandler = async (req, res, next) => {
     }
 }
 
-interface CreateFriendBody {
-    name?: string,
-    age?: number,
-    gender?: string,
-    description?: string,
-    picture?: string,
-}
+// interface CreateFriendBody {
+//     name?: string,
+//     age?: number,
+//     gender?: string,
+//     description?: string,
+//     picture?: string,
+// }
 
 //create Friend function
 export const createFriend: RequestHandler = async (req, res, next) => {
@@ -65,25 +65,25 @@ export const createFriend: RequestHandler = async (req, res, next) => {
 };
 
 //check friend
-// export const checkFriends: RequestHandler = async (req, res, next) => {
-//     const { name } = req.query;
+export const checkFriends: RequestHandler = async (req, res, next) => {
+    const { name } = req.query;
 
-//     try {
-//         if (!name) {
-//             return next(createHttpError(400, "Friend must have a name!"));
-//         }
+    try {
+        if (!name) {
+            return next(createHttpError(400, "Friend must have a name!"));
+        }
 
-//         const friend = await FriendModel.findOne({ name: name.toString() });
+        const friend = await FriendModel.findOne({ name: name.toString() });
 
-//         if (friend) {
-//             return res.status(200).json({ exists: true, friend });
-//         } else {
-//             return res.status(200).json({ exists: false });
-//         }
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+        if (friend) {
+            return res.status(200).json({ exists: true, friend });
+        } else {
+            return res.status(200).json({ exists: false });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
 
 interface UpdateFriendParams {
     friendId: string,
