@@ -10,13 +10,14 @@ import { Friends } from '../../models/friends';
 interface FriendContainerProps {
     friends: Friends;
     onDeleteFriend: (friendId: string) => void;
+    onUpdateFriend: (updatedFriend: Friends) => void;
 }
 
-const FriendContainer: React.FC<FriendContainerProps> = ({ friends, onDeleteFriend }) => {
+const FriendContainer: React.FC<FriendContainerProps> = ({ friends, onDeleteFriend, onUpdateFriend }) => {
     return (
         <Card className="bg-others-container border border-[#303051] bg-opacity-75 backdrop-blur">
             <CardHeader className="items-end">
-                <FriendProfile friends={friends} onDeleteFriend={onDeleteFriend} />
+                <FriendProfile friends={friends} onDeleteFriend={onDeleteFriend} onUpdateFriend={onUpdateFriend} />
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center gap-4">
                 <div className="w-full h-full rounded-md">
