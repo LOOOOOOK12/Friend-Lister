@@ -27,6 +27,10 @@ function App() {
         setFriends(prevFriends => [...prevFriends, newFriend]);
     };
 
+    const handleUpdateFriend = (updatedFriend: Friends) => {
+        setFriends(prevFriends => prevFriends.map(friend => friend._id === updatedFriend._id ? updatedFriend : friend));
+    };
+
     const handleDeleteFriend = async (friendId: string) => {
         try {
             await FriendsApi.deleteFriend(friendId);
@@ -73,7 +77,7 @@ function App() {
                     friends.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full h-full">
                             {friends.map((friend) => (
-                                <FriendContainer key={friend._id} friends={friend} onDeleteFriend={handleDeleteFriend} />
+                                <FriendContainer key={friend._id} friends={friend} onDeleteFriend={handleDeleteFriend} onUpdateFriend={handleUpdateFriend} />
                             ))}
                         </div>
                     ) : (
