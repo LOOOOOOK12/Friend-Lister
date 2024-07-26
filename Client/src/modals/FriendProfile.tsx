@@ -7,9 +7,10 @@ import { Friends } from '../models/friends';
 interface FriendProfileProps {
     friends: Friends;
     onDeleteFriend: (friendId: string) => void;
+    onUpdateFriend: (updatedFriend: Friends) => void;
 }
 
-const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }: FriendProfileProps) => {
+const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend, onUpdateFriend }: FriendProfileProps) => {
     const handleDeleteFriendClicked = () => {
         onDeleteFriend(friends._id);
     };
@@ -60,6 +61,7 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend }
                             picture: friends.picture,
                             description: friends.description
                         }}
+                        onUpdateFriend={onUpdateFriend}
                     />
                     <DeleteFriend onDeleteFriendClicked={handleDeleteFriendClicked} />
                 </DialogFooter>
