@@ -13,6 +13,7 @@ import Labels from '@/components/containers/labels';
 import TextArea from '@/components/containers/textArea';
 import { Friends } from '../models/friends';
 import * as FriendsApi from "../network/friends_api";
+import defaultImage2 from "../assets/defaultImage2.png"
 
 interface EditFriendProps {
     friendId: string;
@@ -52,6 +53,9 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
     const onSubmit = async (data: any) => {
         setLoading(true);
         try {
+            if(!data.picture){
+                data.picture = defaultImage2;
+            }
             const updatedFriend = await FriendsApi.updateFriend(friendId, data);
             onUpdateFriend(updatedFriend);
             setIsOpen(false);
@@ -98,7 +102,11 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
                         <Controller
                             name="age"
                             control={control}
-                            rules={{ required: 'Age is required', pattern: { value: /^[0-9]+$/, message: 'Age must be a number' } }}
+                            rules={{ 
+                                required: 'Age is required', 
+                                pattern: { value: /^[0-9]+$/, message: 'Age must be a number' }, 
+                                max: { value: 99, message: 'Maximum age reached'}
+                            }}
                             render={({ field }) => (
                                 <>
                                     <Labels
