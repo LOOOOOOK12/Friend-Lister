@@ -6,6 +6,7 @@ import Labels from '@/components/containers/labels';
 import TextArea from '@/components/containers/textArea';
 import { createFriend } from "@/network/friends_api";
 import { Friends } from "@/models/friends"; 
+import defaultImage2 from "../assets/defaultImage2.png"
 
 interface AddFriendProps {
     onAddFriend: (newFriend: Friends) => void;
@@ -32,6 +33,9 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
 
     const onSubmit = async (data: Friends) => {
         try {
+            if(!data.picture){
+                data.picture = defaultImage2;
+            }
             const newFriend = await createFriend(data);
             console.log("Friend added successfully:", newFriend);
             onAddFriend(newFriend);
@@ -74,7 +78,11 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                         <Controller
                             name="age"
                             control={control}
-                            rules={{ required: 'Age is required', pattern: { value: /^[0-9]+$/, message: 'Age must be a number' } }}
+                            rules={{ 
+                                required: 'Age is required', 
+                                pattern: { value: /^[0-9]+$/, message: 'Age must be a number'}, 
+                                max: { value: 99, message: 'Maximum age reached'}
+                            }}
                             render={({ field }) => (
                                 <>
                                     <Labels
