@@ -49,7 +49,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={loading}
         {...props}
       >
-        {loading ? "Loading..." : props.children} {/* Show loading text or children */}
+        {loading ? "Loading..." : props.children}
       </Comp>
     )
   }
