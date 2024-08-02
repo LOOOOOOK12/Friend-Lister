@@ -29,7 +29,7 @@ export interface LoginCredentials {
     password: string
 }
 
-export async function login(credentials: SignUpCredentials): Promise<Users>{
+export async function login(credentials: LoginCredentials): Promise<Users>{
     const response = await fetchData("/api/users/login",
         {
             method: "POST",
