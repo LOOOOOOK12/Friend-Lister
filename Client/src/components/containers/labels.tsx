@@ -25,7 +25,7 @@ function Labels({ labelName, type, placeholder, value, onChange, onFileChange, c
 
     return (
         <div className="flex flex-col gap-2">
-            <Label>{labelName}</Label>
+            <Label className='text-others-text'>{labelName}</Label>
             <Input
                 accept='image/*'
                 id={labelName.toLowerCase()}
@@ -33,7 +33,7 @@ function Labels({ labelName, type, placeholder, value, onChange, onFileChange, c
                 type={type}
                 onChange={handleChange}
                 value={type !== 'file' ? displayValue : undefined}
-                className={`col-span-3 ${className}`}
+                className={`col-span-3 text-others-text ${className}`}
             />
         </div>
     );
