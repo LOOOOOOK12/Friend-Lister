@@ -7,6 +7,7 @@ import TextArea from '@/components/containers/textArea';
 import { createFriend } from "@/network/friends_api";
 import { Friends } from "@/models/friends"; 
 import defaultImage2 from "../assets/defaultImage2.png"
+import { Plus } from 'lucide-react';
 
 interface AddFriendProps {
     onAddFriend: (newFriend: Friends) => void;
@@ -20,16 +21,29 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
         const file = event.target.files?.[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64String = reader.result?.toString();
-                if (base64String) {
-                    onChange(base64String);
-                }
-            };
-            reader.readAsDataURL(file);
+            const acceptedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
+            if (acceptedImageTypes.includes(file.type)) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64String = reader.result?.toString();
+                    if (base64String) {
+                        onChange(base64String);
+                    } else {
+                        console.error('Failed to convert file to base64 string.');
+                    }
+                };
+                reader.onerror = () => {
+                    console.error('An error occurred while reading the file.');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                console.error('File type not supported. Please select an image file.');
+            }
+        } else {
+            console.error('No file selected.');
         }
     };
+    
 
     const onSubmit = async (data: Friends) => {
         try {
@@ -49,7 +63,7 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className='bg-others-secondary border-none hover:bg-[#582358]' onClick={() => setIsOpen(true)}>Add Friend</Button>
+                <Button className='bg-others-secondary border-none hover:bg-[#582358]' onClick={() => setIsOpen(true)}><Plus/></Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
