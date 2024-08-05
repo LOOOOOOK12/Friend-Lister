@@ -1,17 +1,30 @@
-import React from 'react'
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Labels from '@/components/containers/labels';
 import { Button } from '@/components/ui/button';
-import { SignUpCredentials } from '@/network/users_api';
-import { Link } from 'react-router-dom';
+import { SignUpCredentials, signUp } from '@/network/users_api';
+import { Link, useNavigate } from 'react-router-dom';
+
+interface SignUpForm extends SignUpCredentials {
+    confirmPassword: string;
+}
 
 function Signup() {
+    const { control, handleSubmit, watch, formState: { errors } } = useForm<SignUpForm>();
+    const navigate = useNavigate();
 
-    const { control, handleSubmit, reset, formState: { errors } } = useForm<SignUpCredentials>();
+    const onSubmit = async (data: SignUpForm) => {
+        try {
+            const { confirmPassword, ...signUpData } = data;
+            const user = await signUp(signUpData);
+            console.log('Signup successful:', user);
+            navigate('/Login');
+        } catch (error) {
+            console.error('Signup failed:', error);
+        }
+    };
 
-    const onSubmit = async (data:SignUpCredentials) => {
-
-    }
+    const password = watch('password');
 
     return (
         <div className='relative flex flex-col justify-center gap-3 items-center h-screen bg-others-background'>
@@ -21,65 +34,86 @@ function Signup() {
                 <h1 className="text-4xl md:text-6xl text-transparent bg-clip-text font-bold inline-block bg-gradient-to-r from-others-primary via-others-secondary to-others-accent">Create Account</h1>
                 <div className='w-full flex flex-col gap-3'>
                     <Controller
-                            name="username"
-                            control={control}
-                            rules={{ required: 'Username is Required' }}
-                            render={({ field }) => (
-                                <>
-                                    <Labels
-                                        labelName="Username"
-                                        type="text"
-                                        placeholder="Enter your username"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        className={errors.username ? 'border-red-500' : ''}
-                                    />
-                                    {errors.username && <p className="text-red-500">{errors.username.message}</p>}
-                                </>
-                            )}
-                        />
-                        <Controller
-                            name="email"
-                            control={control}
-                            rules={{ required: 'email is Required' }}
-                            render={({ field }) => (
-                                <>
-                                    <Labels
-                                        labelName="Email"
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        className={errors.username ? 'border-red-500' : ''}
-                                    />
-                                    {errors.username && <p className="text-red-500">{errors.username.message}</p>}
-                                </>
-                            )}
-                        />
-                        <Controller
-                            name="password"
-                            control={control}
-                            rules={{ required: 'Username is Required' }}
-                            render={({ field }) => (
-                                <>
-                                    <Labels
-                                        labelName="Password"
-                                        type="text"
-                                        placeholder="Enter your username"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        className={errors.username ? 'border-red-500' : ''}
-                                    />
-                                    {errors.username && <p className="text-red-500">{errors.username.message}</p>}
-                                </>
-                            )}
-                        />
-                    <Link to="/"><Button  className='bg-others-secondary hover:bg-[#582358] border-none text-others-text'>Login</Button></Link>
+                        name="username"
+                        control={control}
+                        rules={{ required: 'Username is Required' }}
+                        render={({ field }) => (
+                            <>
+                                <Labels
+                                    labelName="Username"
+                                    type="text"
+                                    placeholder="Enter your username"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    className={errors.username ? 'border-red-500' : ''}
+                                />
+                                {errors.username && <p className="text-red-500">{errors.username.message}</p>}
+                            </>
+                        )}
+                    />
+                    <Controller
+                        name="email"
+                        control={control}
+                        rules={{ required: 'Email is Required' }}
+                        render={({ field }) => (
+                            <>
+                                <Labels
+                                    labelName="Email"
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    className={errors.email ? 'border-red-500' : ''}
+                                />
+                                {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+                            </>
+                        )}
+                    />
+                    <Controller
+                        name="password"
+                        control={control}
+                        rules={{ required: 'Password is Required' }}
+                        render={({ field }) => (
+                            <>
+                                <Labels
+                                    labelName="Password"
+                                    type="password"
+                                    placeholder="Enter your password"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    className={errors.password ? 'border-red-500' : ''}
+                                />
+                                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+                            </>
+                        )}
+                    />
+                    <Controller
+                        name="confirmPassword"
+                        control={control}
+                        rules={{
+                            required: 'Confirm Password is Required',
+                            validate: value => value === password || 'Passwords do not match'
+                        }}
+                        render={({ field }) => (
+                            <>
+                                <Labels
+                                    labelName="Confirm Password"
+                                    type="password"
+                                    placeholder="Confirm your password"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    className={errors.confirmPassword ? 'border-red-500' : ''}
+                                />
+                                {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword.message}</p>}
+                            </>
+                        )}
+                    />
+                    <Button type="submit" className='bg-others-secondary hover:bg-[#582358] border-none text-others-text'>Create Account</Button>
                 </div>
-                <p className='text-others-text'>Already have an account? <Link to="/Login"><a className='text-others-accent'>Login now</a></Link></p>
+                <p className='text-others-text'>Already have an account? <Link to="/Login" className='text-others-accent'>Login now</Link></p>
             </form>
         </div>
-    )
+    );
 }
 
-export default Signup
+export default Signup;
