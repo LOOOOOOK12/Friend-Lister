@@ -18,7 +18,7 @@ function Signup() {
             const { confirmPassword, ...signUpData } = data;
             const user = await signUp(signUpData);
             console.log('Signup successful:', user);
-            navigate('/Login');
+            navigate('/');
         } catch (error) {
             console.error('Signup failed:', error);
         }
@@ -110,7 +110,7 @@ function Signup() {
                     />
                     <Button type="submit" className='bg-others-secondary hover:bg-[#582358] border-none text-others-text'>Create Account</Button>
                 </div>
-                <p className='text-others-text'>Already have an account? <Link to="/Login" className='text-others-accent'>Login now</Link></p>
+                <p className='text-others-text'>Already have an account? <Link to="/" className='text-others-accent'>Login now</Link></p>
             </form>
         </div>
     );
