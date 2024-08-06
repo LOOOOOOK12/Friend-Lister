@@ -9,7 +9,7 @@ function routes() {
         <BrowserRouter>
             <Routes>
                 <Route
-                    path='/Login'
+                    path='/'
                     element={<Login/>}
                 />
                 <Route
