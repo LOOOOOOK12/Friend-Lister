@@ -1,7 +1,8 @@
 import { InferSchemaType, model, Schema } from "mongoose";
 
 const friendSchema = new Schema({
-    name: { type: String, required: true },
+    userId: {type: Schema.Types.ObjectId, required: true},
+    name: { type: String, required: true }, 
     age: { type: Number },
     gender: { type: String },
     description: { type: String },
