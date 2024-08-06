@@ -2,11 +2,16 @@ import { RequestHandler } from "express";
 import FriendModel from "../models/friend";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
+import { assertIsDefined } from "../util/assertIsDefined";
 
 //Load Friends
 export const getFriends: RequestHandler = async (req, res, next) => {
+    const authenticatedUserId = req.session.userId;
+    
     try{
-        const friends = await FriendModel.find().exec()
+        assertIsDefined(authenticatedUserId);
+
+        const friends = await FriendModel.find({userId: authenticatedUserId}).exec()
         res.status(200).json(friends);
     } catch(error){
         next(error)
@@ -16,8 +21,11 @@ export const getFriends: RequestHandler = async (req, res, next) => {
 //get specific friend
 export const getFriend: RequestHandler = async (req, res, next) => {
     const friendId = req.params.friendId
+    const authenticatedUserId = req.session.userId;
 
     try {
+        assertIsDefined(authenticatedUserId);
+
         if(!mongoose.isValidObjectId(friendId)){
             throw createHttpError(400, "Invalid Friend ID")
         }
@@ -27,6 +35,11 @@ export const getFriend: RequestHandler = async (req, res, next) => {
         if(!friend){
             throw createHttpError(404,"Friend Not Found")
         }
+
+        if(!friend.userId.equals(authenticatedUserId)){
+            throw createHttpError(401, "You cannot access this friend")
+        }
+
         res.status(200).json(friend)
     } catch (error) {
         next(error)
@@ -44,13 +57,16 @@ export const getFriend: RequestHandler = async (req, res, next) => {
 //create Friend function
 export const createFriend: RequestHandler = async (req, res, next) => {
     const { name, age, gender, description, picture } = req.body;
+    const authenticatedUserId = req.session.userId;
 
     try {
+        assertIsDefined(authenticatedUserId);
         if (!name) {
             throw createHttpError(400, "Friend must have a Name!!");
         }
 
         const newFriend = await FriendModel.create({
+            userId: authenticatedUserId,
             name,
             age,
             gender,
@@ -105,8 +121,11 @@ export const updateFriend: RequestHandler <UpdateFriendParams, unknown, UpdateFr
     const newGender = req.body.gender
     const newDescription = req.body.description
     const newPicture = req.body.picture
-    
+    const authenticatedUserId = req.session.userId;
+
     try {
+        assertIsDefined(authenticatedUserId)
+
         if(!mongoose.isValidObjectId(friendId)){
             throw createHttpError(400, "Invalid Friend ID")
         }
@@ -119,6 +138,10 @@ export const updateFriend: RequestHandler <UpdateFriendParams, unknown, UpdateFr
 
         if(!friend){
             throw createHttpError(404, "Friend not found")
+        }
+
+        if(!friend.userId.equals(authenticatedUserId)){
+            throw createHttpError(401, "You cannot access this friend")
         }
 
         friend.name = newName
@@ -139,8 +162,11 @@ export const updateFriend: RequestHandler <UpdateFriendParams, unknown, UpdateFr
 //delete Friend function
 export const deleteFriend: RequestHandler = async ( req, res, next )=> {
     const friendId = req.params.friendId
+    const authenticatedUserId = req.session.userId;
 
     try {
+        assertIsDefined(authenticatedUserId)
+
         if(!mongoose.isValidObjectId(friendId)){
             throw createHttpError(400, "Invalid Friend ID")
         }
@@ -148,6 +174,10 @@ export const deleteFriend: RequestHandler = async ( req, res, next )=> {
 
         if(!friend){
             throw createHttpError(404, "Friend not found")
+        }
+
+        if(!friend.userId.equals(authenticatedUserId)){
+            throw createHttpError(401, "You cannot access this friend")
         }
         
         res.sendStatus(204)
