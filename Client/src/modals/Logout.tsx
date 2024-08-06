@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -6,17 +5,29 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { LogOut } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import * as UsersApi from '@/network/users_api';
+import { useNavigate } from 'react-router-dom';
 
 function Logout() {
+    const navigate = useNavigate();
+    async function logout() {
+        try {
+            await UsersApi.logout();
+            console.log("Log out successful")
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="bg-others-secondary border-none hover:bg-[#582358]" >
-                    <LogOut/>
+                <Button className="bg-others-secondary border-none hover:bg-[#582358]">
+                    <LogOut />
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] flex flex-col items-center">
@@ -24,12 +35,12 @@ function Logout() {
                     <DialogTitle>Are you sure you want to Log-out</DialogTitle>
                 </DialogHeader>
                 <DialogFooter className="flex flex-row items-center justify-center gap-2">
-                    <Link to="/Login"><Button className="bg-green-500 border-none hover:bg-green-600" >Yes</Button></Link>
+                    <Button className="bg-green-500 border-none hover:bg-green-600" onClick={logout}>Yes</Button>
                     <Button variant="destructive">No</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
 
-export default Logout
+export default Logout;
