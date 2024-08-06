@@ -7,7 +7,7 @@ import TextArea from '@/components/containers/textArea';
 import { createFriend } from "@/network/friends_api";
 import { Friends } from "@/models/friends"; 
 import defaultImage2 from "../assets/defaultImage2.png"
-import { Plus } from 'lucide-react';
+import { UserRoundPlus } from 'lucide-react';
 
 interface AddFriendProps {
     onAddFriend: (newFriend: Friends) => void;
@@ -63,7 +63,7 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className='bg-others-secondary border-none hover:bg-[#582358]' onClick={() => setIsOpen(true)}><Plus/></Button>
+                <Button className='bg-others-secondary border-none hover:bg-[#582358]' onClick={() => setIsOpen(true)}><UserRoundPlus/></Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
