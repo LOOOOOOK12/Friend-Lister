@@ -4,12 +4,15 @@ import Navbar from './components/containers/nav';
 import FriendContainer from './components/containers/friendContainer';
 import { Friends } from './models/friends';
 import * as FriendsApi from "./network/friends_api";
+import * as UserApi from './network/users_api';
 import { MoveUp } from 'lucide-react';
+import { Users } from './models/users';
 
 function App() {
     const [friends, setFriends] = useState<Friends[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [searching, setSearching] = useState<boolean>(false);
+    const [loggedInUser, setLoggedInUser] = useState<Users | null>(null);
 
     useEffect(() => {
         async function loadFriends() {
@@ -73,7 +76,7 @@ function App() {
                 </div>
                 {searching ? (
                     <h1 className="text-2xl text-others-text">Searching...</h1>
-                    ) : (
+                ) : (
                     friends.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full h-full">
                             {friends.map((friend) => (
