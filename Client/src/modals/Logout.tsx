@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Dialog,
     DialogContent,
@@ -12,7 +13,10 @@ import * as UsersApi from '@/network/users_api';
 import { useNavigate } from 'react-router-dom';
 
 function Logout() {
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+    const handleDialogClose = () => setIsOpen(false);
+
     async function logout() {
         try {
             await UsersApi.logout();
@@ -24,7 +28,7 @@ function Logout() {
     }
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button className="bg-others-secondary border-none hover:bg-[#582358]">
                     <LogOut />
@@ -36,7 +40,7 @@ function Logout() {
                 </DialogHeader>
                 <DialogFooter className="flex flex-row items-center justify-center gap-2">
                     <Button className="bg-green-500 border-none hover:bg-green-600" onClick={logout}>Yes</Button>
-                    <Button variant="destructive">No</Button>
+                    <Button variant="destructive" onClick={handleDialogClose}>No</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
