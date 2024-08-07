@@ -26,6 +26,18 @@ function App() {
         loadFriends();
     }, []);
 
+    useEffect(() => {
+        async function loadUser() {
+            try {
+                const user = await UserApi.getLoggedInUser();
+                setLoggedInUser(user);
+            } catch (error) {
+                alert('Error fetching user');
+            }
+        }
+        loadUser();
+    }, []);
+
     const handleAddFriend = (newFriend: Friends) => {
         setFriends(prevFriends => [...prevFriends, newFriend]);
     };
@@ -46,9 +58,9 @@ function App() {
     const handleSearchFriends = async (searchTerm: string) => {
         setSearchTerm(searchTerm);
         setSearching(true);
-        if (searchTerm) {
+        if (searchTerm && loggedInUser) {
             try {
-                const foundFriends = await FriendsApi.findFriends(searchTerm);
+                const foundFriends = await FriendsApi.findFriends(searchTerm, loggedInUser._id);
                 setFriends(foundFriends);
             } catch (error) {
                 alert('Friend cannot be found');
