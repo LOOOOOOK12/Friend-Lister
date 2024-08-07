@@ -64,13 +64,13 @@ export async function deleteFriend(friendId: string) {
     await fetchData("api/friends/" + friendId, { method: "DELETE" });
 }
 
-export async function findFriends(name: string): Promise<Friends[]> {
+export async function findFriends(name: string, userId: string): Promise<Friends[]> {
     const response = await fetch(`/api/friends/find`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, userId }),
     });
 
     if (!response.ok) {
