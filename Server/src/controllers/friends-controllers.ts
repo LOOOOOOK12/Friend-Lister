@@ -209,10 +209,18 @@ export const findFriendById: RequestHandler = async (req, res, next) => {
 
 // Search friends by name
 export const findFriendsByName: RequestHandler = async (req, res, next) => {
-    const { name } = req.body;
+    const { name, userId } = req.body;
 
     try {
-        const friends = await FriendModel.find({ name: { $regex: name, $options: "i" } }).exec();
+        if (!mongoose.isValidObjectId(userId)) {
+            throw createHttpError(400, "Invalid User ID");
+        }
+
+        const friends = await FriendModel.find({ 
+            name: { $regex: name, $options: "i" },
+            userId
+        }).exec();
+        
         res.status(200).json(friends);
     } catch (error) {
         next(error);
