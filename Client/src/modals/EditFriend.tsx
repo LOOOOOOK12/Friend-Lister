@@ -130,7 +130,7 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
                                     <Labels
                                         labelName="Gender"
                                         type="text"
-                                        placeholder="Male/Female"
+                                        placeholder="Male/Female/Others"
                                         value={field.value}
                                         onChange={field.onChange}
                                         className={errors.gender ? 'border-red-500' : ''}
