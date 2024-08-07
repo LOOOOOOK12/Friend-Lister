@@ -120,7 +120,7 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                                     <Labels
                                         labelName="Gender"
                                         type="text"
-                                        placeholder="Male/Female"
+                                        placeholder="Male/Female/Others"
                                         value={field.value}
                                         onChange={field.onChange}
                                         className={errors.gender ? 'border-red-500' : ''}
