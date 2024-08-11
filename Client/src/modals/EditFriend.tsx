@@ -77,7 +77,7 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
-                    <DialogTitle>Edit Friend</DialogTitle>
+                    <DialogTitle>Edit friend</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
                     <div className='flex flex-col gap-2'>
@@ -90,7 +90,7 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
                                     <Labels
                                         labelName="Name"
                                         type="text"
-                                        placeholder="Juan Dela Cruz"
+                                        placeholder="Edit friend name"
                                         value={field.value}
                                         onChange={field.onChange}
                                         className={errors.name ? 'border-red-500' : ''}
@@ -110,7 +110,7 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
                             render={({ field }) => (
                                 <>
                                     <Labels
-                                        labelName="Age"
+                                        labelName="Edit friend age"
                                         type="text"
                                         placeholder="12"
                                         value={field.value}
