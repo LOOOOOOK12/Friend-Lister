@@ -67,7 +67,7 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
-                    <DialogTitle>Add your Friend</DialogTitle>
+                    <DialogTitle>Add your friend</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
                     <div className='flex flex-col gap-2'>
@@ -80,7 +80,7 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                                     <Labels
                                         labelName="Name"
                                         type="text"
-                                        placeholder="Juan Dela Cruz"
+                                        placeholder="Enter friend name"
                                         value={field.value}
                                         onChange={field.onChange}
                                         className={errors.name ? 'border-red-500' : ''}
@@ -102,7 +102,7 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                                     <Labels
                                         labelName="Age"
                                         type="text"
-                                        placeholder="12"
+                                        placeholder="Enter friend age"
                                         value={field.value}
                                         onChange={field.onChange}
                                         className={errors.age ? 'border-red-500' : ''}
