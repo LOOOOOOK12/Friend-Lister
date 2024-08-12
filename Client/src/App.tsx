@@ -84,7 +84,7 @@ function App() {
                 <div className="absolute overflow-hidden -z-10 left-[2rem] top-[7rem] size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
                 <div className="flex flex-col gap-5 items-center">
                     <h1 className="text-6xl md:text-8xl text-transparent bg-clip-text font-bold inline-block bg-gradient-to-r from-others-primary via-others-secondary to-others-accent">Friend Lister</h1>
-                    <h2 className="text-2xl text-others-text">Add your friends and see the details</h2>
+                    <h2 className="text-2xl text-others-text">Get to know your friends more!!!</h2>
                 </div>
                 {searching ? (
                     <h1 className="text-2xl text-others-text">Searching...</h1>
