@@ -31,7 +31,7 @@ const DeleteFriend: React.FC<DeleteProps> = ({ onDeleteFriendClicked }: DeletePr
                     Delete
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] flex flex-col items-center">
+            <DialogContent className="max-w-[350px] flex flex-col items-center rounded-md">
                 <DialogHeader>
                     <DialogTitle>Are you sure you want to delete your friend?</DialogTitle>
                 </DialogHeader>
