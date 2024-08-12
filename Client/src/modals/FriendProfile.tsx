@@ -10,6 +10,20 @@ interface FriendProfileProps {
     onUpdateFriend: (updatedFriend: Friends) => void;
 }
 
+interface FriendLabelProps{
+    name: string,
+    desc: string
+}
+
+export function FriendLabel({ name, desc }:FriendLabelProps){
+    return(
+        <div className='flex gap-2'>
+            <h3>{name}</h3>
+            <p>{desc}</p>
+        </div>
+    );
+}
+
 const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend, onUpdateFriend }: FriendProfileProps) => {
     const handleDeleteFriendClicked = () => {
         onDeleteFriend(friends._id);
@@ -20,35 +34,35 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend, 
             <DialogTrigger asChild>
                 <Ellipsis className='hover:bg-[#191d31] transition duration-150 rounded-md'/>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[500px]">
-                <DialogHeader className="flex gap-2">
-                    <div className="flex gap-6 flex-row items-center">
+            <DialogContent className="max-w-[300px] rounded-md">
+                <DialogHeader className="flex flex-col items-center gap-2">
                         <div className='h-40'>
                             {friends.picture && (
                                 <img 
                                     src={friends.picture} 
-                                    className="h-full w-full bg-contain rounded-md" 
+                                    className="h-full bg-contain rounded-full" 
                                     alt={friends.name} 
                                 />
                             )}
                         </div>
-                        <div className="flex flex-col gap-3">
-                            <div className='flex gap-3'>
-                                <h1>Name:</h1>
-                                <h1>{friends.name}</h1>
-                            </div>
-                            <div className='flex gap-3'>
-                                <h1>Age:</h1>
-                                <h1>{friends.age}</h1>
-                            </div>
-                            <div className='flex gap-3'>
-                                <h1>Gender:</h1>
-                                <h1>{friends.gender}</h1>
-                            </div>
+                        <div className="flex flex-col gap-2">
+                            <FriendLabel
+                                name="Name:"
+                                desc={friends.name} 
+                            />
+                            <FriendLabel
+                                name="Age:"
+                                desc={friends.age} 
+                            />
+                            <FriendLabel
+                                name="Gender:"
+                                desc={friends.gender} 
+                            />
                         </div>
+                    <div>
+                        <h1 className='text-left text-xl'>About your friend:</h1>
+                        <DialogDescription className='text-lg text-left'>{friends.description}</DialogDescription>
                     </div>
-                    <h1 className='text-left text-2xl font-semibold'>About your friend:</h1>
-                    <DialogDescription className='text-xl text-left'>{friends.description}</DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
                     <EditFriend
