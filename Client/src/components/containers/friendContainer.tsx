@@ -19,13 +19,13 @@ const FriendContainer: React.FC<FriendContainerProps> = ({ friends, onDeleteFrie
             <CardHeader className="items-end">
                 <FriendProfile friends={friends} onDeleteFriend={onDeleteFriend} onUpdateFriend={onUpdateFriend} />
             </CardHeader>
-            <CardContent className="flex flex-col justify-center items-center gap-4">
+            <CardContent className="flex flex-col justify-center items-center gap-2">
                 <div className="w-full h-full rounded-md">
                     {friends.picture && (
                         <img src={friends.picture} alt={friends.name} className="bg-contain rounded-md" />
                     )}
                 </div>
-                <CardTitle>{friends.name}</CardTitle>
+                <CardTitle className="text-3xl">{friends.name}</CardTitle>
             </CardContent>
         </Card>
     );
