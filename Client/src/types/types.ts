@@ -1,4 +1,3 @@
-//for data
 export type Friends = {
     image: string;
     name: string;
@@ -7,7 +6,6 @@ export type Friends = {
     gender: string
 }
 
-//Functions
 export type Add = {
     buttonName: string;
 } 
