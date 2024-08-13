@@ -11,6 +11,16 @@ function Login() {
     const [loginError, setLoginError] = useState<string | null>(null);
 
     const onSubmit = async (data: LoginCredentials) => {
+        if (!data.username || !data.password) {
+            if (!data.username) {
+                setError('username', { type: 'manual', message: 'Username is required' });
+            }
+            if (!data.password) {
+                setError('password', { type: 'manual', message: 'Password is required' });
+            }
+            return;
+        }
+
         try {
             const user = await login(data);
             console.log('Login successful:', user);
@@ -29,8 +39,7 @@ function Login() {
             <div className="absolute overflow-hidden z-10 left-[2rem] bottom-0 size-72 bg-others-accent rounded-full blur-3xl opacity-[0.2]"></div>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center gap-3'>
                 <h1 className="text-4xl md:text-6xl text-transparent bg-clip-text font-bold inline-block bg-gradient-to-r from-others-primary via-others-secondary to-others-accent">Friend Lister</h1>
-                {loginError && <p className="text-red-500">{loginError}</p>}
-                <div className='w-full flex flex-col gap-3'>
+                <div className='w-full flex flex-col gap-2'>
                     <Controller
                         name="username"
                         control={control}
@@ -45,6 +54,7 @@ function Login() {
                                     onChange={field.onChange}
                                     className={errors.username ? 'border-red-500' : ''}
                                 />
+                                {errors.username && <p className="text-red-500">{errors.username.message}</p>}
                             </>
                         )}
                     />
@@ -62,6 +72,7 @@ function Login() {
                                     onChange={field.onChange}
                                     className={errors.password ? 'border-red-500' : ''}
                                 />
+                                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                             </>
                         )}
                     />
