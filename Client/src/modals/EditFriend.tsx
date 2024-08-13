@@ -29,10 +29,10 @@ interface EditFriendProps {
 }
 
 const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, onUpdateFriend }) => {
-    const { control, handleSubmit, reset, formState: { errors } } = useForm({
+    const { control, handleSubmit, reset, setError ,formState: { errors } } = useForm({
         defaultValues: initialFriendData,
     });
-
+    const genders = ["Male", "Female",]
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -52,6 +52,10 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
 
     const onSubmit = async (data: any) => {
         setLoading(true);
+        if(data.gender || genders){
+            setError('gender', { type: 'manual', message: 'Spelling is incorrect' })
+            return;
+        }
         try {
             if(!data.picture){
                 data.picture = defaultImage2;
@@ -132,7 +136,10 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
                                         type="text"
                                         placeholder="Male/Female/Others"
                                         value={field.value}
-                                        onChange={field.onChange}
+                                        onChange={(value: string) => {
+                                            const formattedGender = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+                                            field.onChange(formattedGender);
+                                        }}
                                         className={errors.gender ? 'border-red-500' : ''}
                                     />
                                     {errors.gender && <p className="text-red-500">{errors.gender.message}</p>}
