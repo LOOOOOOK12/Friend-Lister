@@ -14,8 +14,7 @@ interface AddFriendProps {
 }
 
 function AddFriend({ onAddFriend }: AddFriendProps) {
-    const { control, handleSubmit, reset, formState: { errors } } = useForm<Friends>();
-
+    const { control, handleSubmit, reset, setError, formState: { errors } } = useForm<Friends>();
     const [isOpen, setIsOpen] = useState(false);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
@@ -122,7 +121,10 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                                         type="text"
                                         placeholder="Male/Female/Others"
                                         value={field.value}
-                                        onChange={field.onChange}
+                                        onChange={(value: string) => {
+                                            const formattedGender = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+                                            field.onChange(formattedGender);
+                                        }}
                                         className={errors.gender ? 'border-red-500' : ''}
                                     />
                                     {errors.gender && <p className="text-red-500">{errors.gender.message}</p>}
