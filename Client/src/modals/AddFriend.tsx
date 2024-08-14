@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import Labels from '@/components/containers/labels';
+import SelectLabel from '@/components/containers/selectLabel'
 import TextArea from '@/components/containers/textArea';
 import { createFriend } from "@/network/friends_api";
 import { Friends } from "@/models/friends"; 
@@ -14,8 +15,9 @@ interface AddFriendProps {
 }
 
 function AddFriend({ onAddFriend }: AddFriendProps) {
-    const { control, handleSubmit, reset, setError, formState: { errors } } = useForm<Friends>();
+    const { control, handleSubmit, reset, formState: { errors } } = useForm<Friends>();
     const [isOpen, setIsOpen] = useState(false);
+    const genders = ["Male", "Female", "Others"]
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
         const file = event.target.files?.[0];
@@ -116,15 +118,11 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
                             rules={{ required: 'Gender is required' }}
                             render={({ field }) => (
                                 <>
-                                    <Labels
+                                    <SelectLabel
                                         labelName="Gender"
-                                        type="text"
-                                        placeholder="Male/Female/Others"
-                                        value={field.value}
-                                        onChange={(value: string) => {
-                                            const formattedGender = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-                                            field.onChange(formattedGender);
-                                        }}
+                                        placeHolder='Male/Female/Others'
+                                        items={genders}
+                                        onChange={(value) => field.onChange(value)}
                                         className={errors.gender ? 'border-red-500' : ''}
                                     />
                                     {errors.gender && <p className="text-red-500">{errors.gender.message}</p>}
