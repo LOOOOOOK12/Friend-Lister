@@ -14,6 +14,7 @@ import TextArea from '@/components/containers/textArea';
 import { Friends } from '../models/friends';
 import * as FriendsApi from "../network/friends_api";
 import defaultImage2 from "../assets/defaultImage2.png"
+import SelectLabel from "@/components/containers/selectLabel";
 
 interface EditFriendProps {
     friendId: string;
@@ -32,7 +33,7 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
     const { control, handleSubmit, reset, setError ,formState: { errors } } = useForm({
         defaultValues: initialFriendData,
     });
-    const genders = ["Male", "Female",]
+    const genders = ["Male", "Female","Others"]
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -131,15 +132,11 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
                             rules={{ required: 'Gender is required' }}
                             render={({ field }) => (
                                 <>
-                                    <Labels
+                                    <SelectLabel
                                         labelName="Gender"
-                                        type="text"
-                                        placeholder="Male/Female/Others"
-                                        value={field.value}
-                                        onChange={(value: string) => {
-                                            const formattedGender = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-                                            field.onChange(formattedGender);
-                                        }}
+                                        placeHolder='Male/Female/Others'
+                                        items={genders}
+                                        onChange={(value) => field.onChange(value)}
                                         className={errors.gender ? 'border-red-500' : ''}
                                     />
                                     {errors.gender && <p className="text-red-500">{errors.gender.message}</p>}
