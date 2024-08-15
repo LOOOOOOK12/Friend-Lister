@@ -53,10 +53,10 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
 
     const onSubmit = async (data: any) => {
         setLoading(true);
-        if(data.gender || genders){
-            setError('gender', { type: 'manual', message: 'Spelling is incorrect' })
-            return;
-        }
+        // if(data.gender || genders){
+        //     setError('gender', { type: 'manual', message: 'Spelling is incorrect' })
+        //     return;
+        // }
         try {
             if(!data.picture){
                 data.picture = defaultImage2;
