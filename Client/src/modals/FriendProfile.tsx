@@ -36,14 +36,14 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend, 
             </DialogTrigger>
             <DialogContent className="max-w-[300px] rounded-md">
                 <DialogHeader className="flex flex-col items-center gap-2">
-                        <div className='h-40'>
-                            {friends.picture && (
-                                <img 
-                                    src={friends.picture} 
-                                    className="h-full bg-contain rounded-full" 
-                                    alt={friends.name} 
-                                />
-                            )}
+                    <div className='h-40'>
+                        {friends.picture && (
+                            <img 
+                                src={friends.picture} 
+                                className="h-full bg-contain rounded-full" 
+                                alt={friends.name} 
+                            />
+                        )}
                         </div>
                         <div className="flex flex-col gap-2">
                             <FriendLabel
@@ -60,8 +60,8 @@ const FriendProfile: React.FC<FriendProfileProps> = ({ friends, onDeleteFriend, 
                             />
                         </div>
                     <div>
-                        <h1 className='text-left text-xl'>About your friend:</h1>
-                        <DialogDescription className='text-lg text-left'>{friends.description}</DialogDescription>
+                        <h1 className='text-left'>About your friend:</h1>
+                        <p>{friends.description}</p>
                     </div>
                 </DialogHeader>
                 <DialogFooter>
