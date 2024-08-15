@@ -38,7 +38,7 @@ function Logout() {
                 <DialogHeader>
                     <DialogTitle>Are you sure you want to Log-out</DialogTitle>
                 </DialogHeader>
-                <DialogFooter className="flex flex-row items-center justify-center gap-2">
+                <DialogFooter className="flex flex-row items-center justify-center">
                     <Button className="bg-green-500 border-none hover:bg-green-600" onClick={logout}>Yes</Button>
                     <Button variant="destructive" onClick={handleDialogClose}>No</Button>
                 </DialogFooter>
