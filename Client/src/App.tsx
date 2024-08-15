@@ -38,6 +38,14 @@ function App() {
         loadUser();
     }, []);
 
+    const handleExistingFriend = async (existingFriend: Friends) => {
+        try {
+            await FriendsApi.checkFriendExists
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const handleAddFriend = (newFriend: Friends) => {
         setFriends(prevFriends => [...prevFriends, newFriend]);
     };
