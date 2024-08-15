@@ -12,6 +12,7 @@ import { UserRoundPlus } from 'lucide-react';
 
 interface AddFriendProps {
     onAddFriend: (newFriend: Friends) => void;
+    checkExistingFriend?: (existingFriend: Friends) => void;
 }
 
 function AddFriend({ onAddFriend }: AddFriendProps) {
