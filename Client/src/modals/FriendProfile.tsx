@@ -1,5 +1,5 @@
 import { Ellipsis } from 'lucide-react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
 import EditFriend from './EditFriend';
 import DeleteFriend from './DeleteFriend';
 import { Friends } from '../models/friends';
