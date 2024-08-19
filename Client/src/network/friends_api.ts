@@ -38,7 +38,6 @@ export async function createFriend(friend: FriendInput): Promise<Friends> {
     return response.json();
 }
 
-
 export async function checkFriendExists(friend: { name: string }): Promise<boolean> {
     const params = new URLSearchParams(friend).toString();
     const response = await fetch(`/api/friends/check-friend?${params}`, { method: 'GET' });
@@ -79,3 +78,4 @@ export async function findFriends(name: string, userId: string): Promise<Friends
 
     return response.json();
 }
+
