@@ -1,21 +1,21 @@
-import express from "express"
-import * as FriendsController from "../controllers/friends-controllers"
+import express from "express";
+import * as FriendsController from "../controllers/friends-controllers";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/" , FriendsController.getFriends)
+router.get("/check-friend", FriendsController.checkFriendExists); 
 
-router.get("/:friendId", FriendsController.getFriend)
+router.get("/", FriendsController.getFriends); 
 
-router.get("/", FriendsController.checkFriends);
+router.get("/:friendId", FriendsController.getFriend); 
 
-router.post("/", FriendsController.createFriend)
+router.post("/", FriendsController.createFriend);
 
-router.patch("/:friendId",FriendsController.updateFriend)
+router.patch("/:friendId", FriendsController.updateFriend); 
 
-router.delete("/:friendId", FriendsController.deleteFriend)
+router.delete("/:friendId", FriendsController.deleteFriend); 
 
-router.post("/find", FriendsController.findFriendsByName);
+router.post("/find", FriendsController.findFriendsByName); 
 
 router.get("/:friendId", FriendsController.findFriendById);
 
