@@ -46,14 +46,6 @@ export const getFriend: RequestHandler = async (req, res, next) => {
     }
 }
 
-// interface CreateFriendBody {
-//     name?: string,
-//     age?: number,
-//     gender?: string,
-//     description?: string,
-//     picture?: string,
-// }
-
 //create Friend function
 export const createFriend: RequestHandler = async (req, res, next) => {
     const { name, age, gender, description, picture } = req.body;
@@ -222,6 +214,31 @@ export const findFriendsByName: RequestHandler = async (req, res, next) => {
         }).exec();
         
         res.status(200).json(friends);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const checkFriendExists: RequestHandler = async (req, res, next) => {
+    const { name } = req.query;
+    const authenticatedUserId = req.session.userId;
+
+    try {
+        if (!name) {
+            throw createHttpError(400, "Friend must have a name!");
+        }
+
+        if (!authenticatedUserId) {
+            throw createHttpError(401, "User not authenticated");
+        }
+
+        const friend = await FriendModel.findOne({ name: name.toString(), userId: authenticatedUserId }).exec();
+
+        if (friend) {
+            res.status(200).json({ exists: true });
+        } else {
+            res.status(200).json({ exists: false });
+        }
     } catch (error) {
         next(error);
     }
