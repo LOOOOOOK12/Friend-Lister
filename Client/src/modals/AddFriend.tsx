@@ -3,22 +3,22 @@ import { useForm, Controller } from 'react-hook-form';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import Labels from '@/components/containers/labels';
-import SelectLabel from '@/components/containers/selectLabel'
+import SelectLabel from '@/components/containers/selectLabel';
 import TextArea from '@/components/containers/textArea';
 import { createFriend } from "@/network/friends_api";
 import { Friends } from "@/models/friends"; 
-import defaultImage2 from "../assets/defaultImage2.png"
+import defaultImage2 from "../assets/defaultImage2.png";
 import { UserRoundPlus } from 'lucide-react';
+import * as FriendsApi from "@/network/friends_api";
 
 interface AddFriendProps {
     onAddFriend: (newFriend: Friends) => void;
-    checkExistingFriend?: (existingFriend: Friends) => void;
 }
 
 function AddFriend({ onAddFriend }: AddFriendProps) {
-    const { control, handleSubmit, reset, formState: { errors } } = useForm<Friends>();
+    const { control, handleSubmit, reset, setError, formState: { errors } } = useForm<Friends>();
     const [isOpen, setIsOpen] = useState(false);
-    const genders = ["Male", "Female", "Others"]
+    const genders = ["Male", "Female", "Others"];
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, onChange: (value: string) => void) => {
         const file = event.target.files?.[0];
@@ -45,15 +45,21 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
             console.error('No file selected.');
         }
     };
-    
 
     const onSubmit = async (data: Friends) => {
         try {
-            if(!data.picture){
+            const friendExists = await FriendsApi.checkFriendExists({ name: data.name });
+            if (friendExists) {
+                setError('name', { type: 'manual', message: 'A friend with this name already exists.' });
+                return;
+            }
+
+            if (!data.picture) {
                 data.picture = defaultImage2;
             }
+
             const newFriend = await createFriend(data);
-            console.log("Friend added successfully:", newFriend);
+            // console.log("Friend added successfully:", newFriend);
             onAddFriend(newFriend);
             setIsOpen(false);
             reset();
