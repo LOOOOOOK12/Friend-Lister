@@ -54,6 +54,11 @@ const EditFriend: React.FC<EditFriendProps> = ({ friendId, initialFriendData, on
     const onSubmit = async (data: any) => {
         setLoading(true);
         try {
+            const friendExists = await FriendsApi.checkFriendExists({ name: data.name });
+            if (friendExists) {
+                setError('name', { type: 'manual', message: 'A friend with this name already exists.' });
+                return;
+            }
             if(!data.picture){
                 data.picture = defaultImage2;
             }
