@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Labels from '@/components/containers/labels';
 import { Button } from '@/components/ui/button';
@@ -10,7 +9,7 @@ interface SignUpForm extends SignUpCredentials {
 }
 
 function Signup() {
-    const { control, handleSubmit, watch, formState: { errors } } = useForm<SignUpForm>();
+    const { control, handleSubmit, watch, setError , formState: { errors } } = useForm<SignUpForm>();
     const navigate = useNavigate();
 
     const onSubmit = async (data: SignUpForm) => {
@@ -19,8 +18,17 @@ function Signup() {
             const user = await signUp(signUpData);
             console.log('Signup successful:', user);
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.error('Signup failed:', error);
+
+            if (error.message.includes("Username")) {
+                setError("username", { message: "Username is already taken." });
+            } else if (error.message.includes("email")) {
+                setError("email", { message: "Email is already in use." });
+            } else {
+                // Handle other errors
+                console.error('An unexpected error occurred:', error);
+            }
         }
     };
 
