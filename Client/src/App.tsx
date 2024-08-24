@@ -80,8 +80,8 @@ function App() {
         <div className="bg-others-background h-full">
             <main className="py-28 px-5 w-full h-full z-10 text-center flex flex-col gap-10 items-center justify-center relative overflow-hidden" id="Home">
                 <Navbar onAddFriend={handleAddFriend} onFindFriendChange={handleSearchFriends} />
-                <div className="absolute overflow-hidden -z-10 right-[2rem] top-0 size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
-                <div className="absolute overflow-hidden -z-10 left-[2rem] top-[7rem] size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
+                <div className="absolute overflow-hidden -z-10 right-[2rem] top-0 size-40 md:size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
+                <div className="absolute overflow-hidden -z-10 left-[2rem] top-[7rem] size-40 md:size-72 bg-others-accent rounded-full blur-2xl opacity-[0.2]"></div>
                 <div className="flex flex-col gap-5 items-center">
                     <h1 className="text-6xl md:text-8xl text-transparent bg-clip-text font-bold inline-block bg-gradient-to-r from-others-primary via-others-secondary to-others-accent">Friend Lister</h1>
                     <h2 className="text-2xl text-others-text">Get to know your friends more!!!</h2>
