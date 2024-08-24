@@ -35,8 +35,8 @@ function Login() {
 
     return (
         <div className='relative flex flex-col justify-center gap-3 items-center h-screen bg-others-background'>
-            <div className="absolute overflow-hidden z-10 right-[2rem] top-0 size-96 bg-others-accent rounded-full blur-3xl opacity-[0.2]"></div>
-            <div className="absolute overflow-hidden z-10 left-[2rem] bottom-0 size-72 bg-others-accent rounded-full blur-3xl opacity-[0.2]"></div>
+            <div className="absolute overflow-hidden z-10 md:right-[2rem] top-0 size-40 md:size-96 bg-others-accent rounded-full blur-3xl opacity-[0.2]"></div>
+            <div className="absolute overflow-hidden z-10 left-[-5rem] md:left-[2rem] bottom-0 size-24 md:size-72 bg-others-accent rounded-full blur-3xl opacity-[0.2]"></div>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center gap-3'>
                 <h1 className="text-4xl md:text-6xl text-transparent bg-clip-text font-bold inline-block bg-gradient-to-r from-others-primary via-others-secondary to-others-accent">Friend Lister</h1>
                 <div className='w-full flex flex-col gap-2'>
