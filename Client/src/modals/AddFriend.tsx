@@ -59,7 +59,6 @@ function AddFriend({ onAddFriend }: AddFriendProps) {
             }
 
             const newFriend = await createFriend(data);
-            // console.log("Friend added successfully:", newFriend);
             onAddFriend(newFriend);
             setIsOpen(false);
             reset();
